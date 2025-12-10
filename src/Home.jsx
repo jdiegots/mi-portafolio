@@ -137,15 +137,52 @@ function Home() {
             </section>
 
             <main>
-                {/* Projects Marquee Section (Moved Top) */}
+                {/* Projects Marquee Section */}
                 <section id="proyectos" className="section" style={{ paddingBottom: '2rem' }}>
                     <div className="container">
                         <h2 className="section-title">Mis proyectos</h2>
                     </div>
 
-                    <div className="projects-marquee">
-                        <div className="marquee-track">
+                    <div className="projects-grid-wrapper">
+                        <div className="projects-grid">
                             {/* Set 1 */}
+                            <ProjectCard
+                                title="AforoLab"
+                                tags="Analytics / Deporte"
+                                year="2025"
+                                desc="Plataforma de analítica de asistencia a los estadios de fútbol de LaLiga, con visualizaciones interactivas que permiten comparar diferentes métricas entre los clubes que componen las competiciones profesionales del fútbol español."
+                                image="/images/aforolab.png"
+                            />
+                            <ProjectCard
+                                title="Kike Pérez - La mil y pico"
+                                tags="Diseño Gráfico"
+                                year="2023"
+                                desc="Diseño del cartel base de la gira y adaptaciones para distintas funciones y recintos, manteniendo una identidad visual común."
+                                image="/images/kikeperez.jpg"
+                            />
+                            <ProjectCard
+                                title="Wordle Canario"
+                                tags="Web / Viral"
+                                year="2022"
+                                desc="Adaptación cultural del famoso juego. Logró viralidad y cobertura mediática, demostrando el poder de los productos digitales locales."
+                                image="/images/wordle-canario-web.png"
+                            />
+                            <ProjectCard
+                                title="Pasión Colchonera"
+                                tags="Branding / Social"
+                                year="2021"
+                                desc="Redifición de identidad visual para perfiles sociales. Banners, templates y línea gráfica coherente."
+                                image="/images/pasion-colchonera.webp"
+                            />
+                            <ProjectCard
+                                title="Fondo Segunda"
+                                tags="Editorial / Diseño"
+                                year="2020"
+                                desc="Co-fundación de la web Fondo Segunda, medio referencia de la Segunda División del fútbol español. Diseño editorial profesional combinando diseño, estadísticas y artículos de opinión."
+                                image="/images/fondo-segunda.jpg"
+                            />
+
+                            {/* Duplicate for Marquee Loop */}
                             <ProjectCard
                                 title="AforoLab"
                                 tags="Analytics / Deporte"
@@ -349,13 +386,13 @@ function Home() {
                         <h2 className="section-title">Trayectoria</h2>
                         <div className="timeline">
                             <TimelineItem
-                                role="Trabajo Técnico-Institucional"
+                                role="Trabajo técnico-institucional"
                                 place="Prácticas · Desarrollo y Comunicación"
                                 period="Diciembre 2023 – Junio 2024"
                                 description="Soporte integral en tareas de comunicación y gestión técnica: redacción y maquetación de documentos, notas de prensa y administración de redes sociales. Realización de todo el ciclo de análisis de datos para informes y encuestas (recogida, depuración y visualización) y sintetización de normativas y convocatorias en criterios claros. Colaboración activa en la coordinación interna y con otras entidades."
                             />
                             <TimelineItem
-                                role="Grado en Ciencia Política"
+                                role="Grado en Ciencia Política y de la Administración"
                                 place="Universidade de Santiago de Compostela"
                                 period="2020 – 2024"
                                 description="Formación en análisis de políticas públicas y estructura institucional. Base sólida para entender la administración y la toma de decisiones."
@@ -396,7 +433,7 @@ function Home() {
                     <p>© {new Date().getFullYear()} Juan Diego Tejera.</p>
                 </div>
             </footer>
-        </div>
+        </div >
     );
 }
 
