@@ -420,7 +420,7 @@ function Home() {
                             <div className="about-text">
                                 <h2>Más allá del título</h2>
                                 <p>
-                                    Soy graduado en <strong>Ciencia Política y de la Administración</strong>, pero mi pasión real está en la intersección entre
+                                    Soy graduado en <strong>Ciencia Política y de la Administración</strong>, y mi pasión está en la intersección entre
                                     lo <strong>digital</strong> y lo <strong>institucional</strong>. Me muevo cómodo entre documentos técnicos, hojas de cálculo,
                                     normativa, expedientes y líneas de tiempo de vídeo.
                                 </p>
@@ -534,7 +534,7 @@ function Home() {
                                     <div className="tool-grid">
                                         <ToolBadge type="office-xl" label="X" name="Excel Avanzado" />
                                         <ToolBadge type="office-pb" label="Pb" name="PowerBI" />
-                                        <ToolBadge type="brand-qgis" label="Qg" name="QGIS (Mapas)" />
+                                        <ToolBadge type="brand-qgis" label="Qg" name="QGIS" />
                                         <ToolBadge type="brand-spss" label="S" name="SPSS" />
                                         <ToolBadge type="office-xl" label="S" name="Google Sheets" />
                                         <ToolBadge type="text-accent" icon={<Code2 size={14} />} name="SQL" />
