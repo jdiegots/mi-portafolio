@@ -17,6 +17,7 @@ import {
     Palette,
     Zap,
     ArrowRight,
+    ArrowLeft,
     X,
     Maximize2
 } from "lucide-react";
@@ -62,8 +63,11 @@ function Home() {
         let animationFrameId;
 
         const loop = () => {
-            // If user is not dragging, scroll automatically
-            if (!isDown) {
+            // Check if mobile
+            const isMobile = window.innerWidth <= 768;
+
+            // If user is not dragging AND NOT mobile, scroll automatically
+            if (!isDown && !isMobile) {
                 scrollPosRef.current += 0.3; // Slightly faster to avoid sub-pixel quantization stutter
                 scrollContainer.scrollLeft = scrollPosRef.current;
 
@@ -276,6 +280,11 @@ function Home() {
                 <section id="proyectos" className="section" style={{ paddingBottom: '2rem' }}>
                     <div className="container">
                         <h2 className="section-title">Mis proyectos</h2>
+                        <div className="mobile-scroll-hint">
+                            <ArrowLeft size={20} />
+                            <span>Desliza para ver más</span>
+                            <ArrowRight size={20} />
+                        </div>
                     </div>
 
                     <div className="projects-grid-wrapper">
