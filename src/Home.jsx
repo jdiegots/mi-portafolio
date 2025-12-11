@@ -107,6 +107,24 @@ function Home() {
         scrollRef.current.scrollLeft = scrollLeft - walk;
     };
 
+    // Touch Handlers
+    const handleTouchStart = (e) => {
+        setIsDown(true);
+        setStartX(e.touches[0].pageX - scrollRef.current.offsetLeft);
+        setScrollLeft(scrollRef.current.scrollLeft);
+    };
+
+    const handleTouchMove = (e) => {
+        if (!isDown) return;
+        const x = e.touches[0].pageX - scrollRef.current.offsetLeft;
+        const walk = (x - startX) * 2;
+        scrollRef.current.scrollLeft = scrollLeft - walk;
+    };
+
+    const handleTouchEnd = () => {
+        setIsDown(false);
+    };
+
     useEffect(() => {
         if (location.hash) {
             const element = document.getElementById(location.hash.replace('#', ''));
@@ -268,6 +286,10 @@ function Home() {
                             onMouseLeave={handleMouseLeave}
                             onMouseUp={handleMouseUp}
                             onMouseMove={handleMouseMove}
+                            onTouchStart={handleTouchStart}
+                            onTouchMove={handleTouchMove}
+                            onTouchEnd={handleTouchEnd}
+                            onTouchCancel={handleTouchEnd}
                             style={{ cursor: isDown ? 'grabbing' : 'grab' }}
                         >
                             {/* Set 1 */}
