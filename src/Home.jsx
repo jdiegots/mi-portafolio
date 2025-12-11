@@ -514,10 +514,10 @@ function Home() {
                             viewport={{ once: true }}
                             variants={fadeInUp}
                         >
-                            <h2>¿Hablamos?</h2>
-                            <p className="contact-lead">
+                            <h2><div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>¿Hablamos?</div></h2>
+                            <p className="contact-lead"> <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                 Estoy disponible ;)
-                            </p>
+                            </div></p>
                             <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '2rem', flexWrap: 'wrap' }}>
                                 <a href="mailto:jdiegotejeras@gmail.com" className="btn btn-primary btn-large">
                                     <Mail className="btn-icon" /> Enviar correo
