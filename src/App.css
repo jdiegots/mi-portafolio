@@ -120,53 +120,6 @@
 
 
 
-.blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(140px);
-  opacity: 0.45;
-  animation: float 20s infinite ease-in-out;
-}
-
-.blob-1 {
-  width: 900px;
-  height: 900px;
-  background: var(--accent-primary);
-  top: -15%;
-  right: -20%;
-}
-
-.blob-2 {
-  width: 1000px;
-  height: 1000px;
-  background: var(--accent-secondary);
-  top: 5%;
-  left: -25%;
-  animation-delay: -5s;
-}
-
-.blob-3 {
-  width: 800px;
-  height: 800px;
-  background: var(--accent-primary);
-  top: 35%;
-  /* Mid-page */
-  right: -25%;
-  opacity: 0.3;
-  animation-delay: -10s;
-}
-
-.blob-4 {
-  width: 900px;
-  height: 900px;
-  background: var(--accent-secondary);
-  bottom: 10%;
-  /* Near bottom */
-  left: -20%;
-  opacity: 0.35;
-  animation-delay: -15s;
-}
-
 @keyframes float {
 
   0%,
@@ -177,6 +130,85 @@
   50% {
     transform: translate(30px, -30px);
   }
+}
+
+@keyframes heartbeat-pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 0.5;
+  }
+
+  /* More evident opacity change */
+}
+
+@keyframes color-breath {
+
+  0%,
+  100% {
+    background-color: #1e1b4b;
+  }
+
+  /* Indigo 950 */
+  33% {
+    background-color: #4c1d95;
+  }
+
+  /* Violet 900 */
+  66% {
+    background-color: #9240ae;
+  }
+
+  /* Requested Purple */
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.35;
+  mix-blend-mode: normal;
+  animation: float 20s infinite ease-in-out, heartbeat-pulse 8s infinite ease-in-out, color-breath 24s infinite alternate;
+}
+
+.blob-1 {
+  width: 900px;
+  height: 900px;
+  top: -15%;
+  right: -20%;
+  animation-delay: 0s, 0s, -5s;
+}
+
+.blob-2 {
+  width: 1000px;
+  height: 1000px;
+  top: 5%;
+  left: -25%;
+  animation-delay: -5s, -2s, 0s;
+}
+
+.blob-3 {
+  width: 800px;
+  height: 800px;
+  top: 35%;
+  right: -25%;
+  opacity: 0.25;
+  animation-delay: -10s, -5s, -10s;
+}
+
+.blob-4 {
+  width: 900px;
+  height: 900px;
+  bottom: 0%;
+  left: -20%;
+  opacity: 0.3;
+  animation-delay: -15s, -8s, -15s;
 }
 
 
@@ -213,7 +245,7 @@
 .hero-kicker {
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  font-size: 0.875rem;
+  font-size: 0.70rem;
   color: var(--text-secondary);
   margin-bottom: 1.5rem;
 }
@@ -462,6 +494,19 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* Simplified Gradient Text */
+.name-gradient-simple {
+  display: inline-block;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  /* Cursor text to indicate it's readable, but animations imply interactivity */
+  cursor: text;
+  /* Ensure smooth rendering */
+  will-change: transform;
 }
 
 .story-banner p {
