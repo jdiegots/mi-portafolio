@@ -162,12 +162,62 @@ function Home() {
                         <motion.p variants={fadeInUp} className="hero-kicker">
                             Administración · Datos · Comunicación digital · Diseño
                         </motion.p>
-                        <motion.h1 variants={fadeInUp} className="hero-title">
-                            Hola, soy <span className="gradient-text">Diego Tejera :)</span>
+                        <motion.h1
+                            className="hero-title"
+                            initial="hidden"
+                            animate="visible"
+                            variants={{
+                                hidden: { opacity: 0 },
+                                visible: {
+                                    opacity: 1,
+                                    transition: {
+                                        staggerChildren: 0.05,
+                                        delayChildren: 0.2
+                                    }
+                                }
+                            }}
+                        >
+                            {/* "Hola, soy" */}
+                            {Array.from("Hola, soy").map((char, i) => (
+                                <motion.span
+                                    key={`text-${i}`}
+                                    variants={{
+                                        hidden: { y: 20, opacity: 0, filter: "blur(5px)" },
+                                        visible: {
+                                            y: 0,
+                                            opacity: 1,
+                                            filter: "blur(0px)",
+                                            transition: { duration: 0.4 }
+                                        }
+                                    }}
+                                    style={{ display: "inline-block", marginRight: char === " " ? "0.25em" : "0" }}
+                                >
+                                    {char === " " ? "\u00A0" : char}
+                                </motion.span>
+                            ))}
+
+                            <span style={{ display: "inline-block", width: "0.25em" }}></span>
+
+                            {/* "Diego Tejera :)" - Simplified Gradient Scale */}
+                            <motion.span
+                                className="name-gradient-simple"
+                                variants={{
+                                    hidden: { opacity: 0, y: 20, filter: "blur(5px)" },
+                                    visible: {
+                                        opacity: 1,
+                                        y: 0,
+                                        filter: "blur(0px)",
+                                        transition: { duration: 0.5 }
+                                    }
+                                }}
+                                whileHover={{ scale: 1.05 }}
+                                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                            >
+                                Diego Tejera :)
+                            </motion.span>
                         </motion.h1>
                         <motion.p variants={fadeInUp} className="hero-lead">
-                            Convierto información compleja en contenido <strong>visual, claro y útil</strong>.
-                            Combino análisis de datos, diseño y estrategia para ayudar a tomar mejores decisiones.
+                            Busco la <strong>claridad</strong> en lo complejo. Diseño, datos y estrategia para comunicar con sentido.
                         </motion.p>
 
                         <motion.div variants={fadeInUp} className="hero-actions">
@@ -176,7 +226,7 @@ function Home() {
                         </motion.div>
 
                         <motion.div variants={fadeInUp} className="hero-socials">
-                            <SocialLink href="https://www.linkedin.com/in/juandiegotejerasosa/" icon={<Linkedin size={20} />} label="LinkedIn" />
+                            <SocialLink href="https://www.linkedin.com/in/juandiegotejerasosa/" icon={<LinkedInIcon size={20} />} label="LinkedIn" />
                             <SocialLink href="mailto:jdiegotejeras@gmail.com" icon={<Mail size={20} />} label="Email" />
                         </motion.div>
                     </motion.div>
@@ -274,7 +324,7 @@ function Home() {
                             {/* Duplicate for Marquee Loop */}
                             <ProjectCard
                                 title="AforoLab"
-                                tags="Analytics / Deporte"
+                                tags="Datos / Deporte"
                                 year="2025"
                                 desc="Plataforma de analítica de asistencia a los estadios de fútbol de LaLiga, con visualizaciones interactivas que permiten comparar diferentes métricas entre los clubes que componen las competiciones profesionales del fútbol español."
                                 image="/images/aforolab.png"
@@ -518,12 +568,12 @@ function Home() {
                             <p className="contact-lead"> <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                 Estoy disponible ;)
                             </div></p>
-                            <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '2rem', flexWrap: 'wrap' }}>
+                            <div style={{ display: "flex", justifyContent: "center", gap: "1rem", marginTop: "2rem", flexWrap: "wrap" }}>
                                 <a href="mailto:jdiegotejeras@gmail.com" className="btn btn-primary btn-large">
                                     <Mail className="btn-icon" /> Enviar correo
                                 </a>
                                 <a href="https://www.linkedin.com/in/juandiegotejerasosa/" className="btn btn-outline btn-large" target="_blank" rel="noopener noreferrer">
-                                    <Linkedin className="btn-icon" /> LinkedIn
+                                    <LinkedInIcon size={20} className="btn-icon" /> LinkedIn
                                 </a>
                             </div>
                         </motion.div>
@@ -538,21 +588,35 @@ function Home() {
             </footer>
 
             {/* Lightbox Modal */}
-            {selectedImage && (
-                <div className="lightbox" onClick={() => setSelectedImage(null)}>
-                    <div className="lightbox-content" onClick={e => e.stopPropagation()}>
-                        <button className="lightbox-close" onClick={() => setSelectedImage(null)}>
-                            <X size={24} />
-                        </button>
-                        <img src={selectedImage} alt="Vista detallada" />
+            {
+                selectedImage && (
+                    <div className="lightbox" onClick={() => setSelectedImage(null)}>
+                        <div className="lightbox-content" onClick={e => e.stopPropagation()}>
+                            <button className="lightbox-close" onClick={() => setSelectedImage(null)}>
+                                <X size={24} />
+                            </button>
+                            <img src={selectedImage} alt="Vista detallada" />
+                        </div>
                     </div>
-                </div>
-            )}
+                )
+            }
         </div >
     );
 }
 
 // Sub-components for cleaner code
+const LinkedInIcon = ({ size = 24 }) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="currentColor"
+    >
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+    </svg>
+);
+
 function SocialLink({ href, icon, label }) {
     return (
         <a href={href} className="social-link" aria-label={label} target="_blank" rel="noopener noreferrer">
