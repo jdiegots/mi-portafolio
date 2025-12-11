@@ -637,6 +637,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
+  margin-top: 1.5rem;
 }
 
 .tool-badge {
@@ -806,42 +807,62 @@
   }
 }
 
+/* Projects Horizontal Scroll (Flexbox) */
 .projects-grid-wrapper {
   width: 100%;
   padding: 2rem 0;
   overflow: hidden;
-  /* Hide scrollbar for seamless marquee */
-  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
 }
 
 .projects-grid {
-  display: inline-block;
-  white-space: nowrap;
-  animation: scroll 60s linear infinite;
-  padding-bottom: 2rem;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 2rem;
+  padding: 0 1.5rem 2rem 1.5rem;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+
+  /* Hide scrollbar */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
+
+  /* Prevent interaction conflicts */
+  user-select: none;
+  -webkit-user-select: none;
+  /* Ensure JS scroll is immediate */
+  scroll-behavior: auto;
 }
 
-.projects-grid:hover {
-  animation-play-state: paused;
+/* Hide scrollbar for Chrome/Safari/Opera */
+.projects-grid::-webkit-scrollbar {
+  display: none;
 }
+
+/* Pause animation on hover if we use animation later, but for now just standard scroll */
+/* If marquee is still wanted, it conflicts with user asking specifically for "movable" which usually means scrollable, 
+   but "especie de carrusel" usually refers to the marquee. 
+   Wait, if it's "movable", then it should just be scrollable by user. 
+   The user said "que esa parte ... sea movible ... pero que no aparezca debajo esa especie de barra de navegación".
+   So standard horizontal scroll without scrollbar is the goal.
+*/
 
 .project-card {
-  display: inline-block;
-  vertical-align: top;
-  white-space: normal;
-  /* Restore text wrap inside */
-  margin-right: 2rem;
-  background: transparent;
-  border: none;
+  flex: 0 0 auto;
+  /* Don't shrink */
   width: 280px;
   /* Mobile Width */
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  border: none;
   cursor: pointer;
+  /* Ensure equal height behavior is handled by parent flex align-items: stretch (default) */
+  user-select: none;
+  -webkit-user-select: none;
 }
-
-/* Remove last margin IS NOT NEEDED because we validly want gap between end of set 1 and start of set 2.
-   Actually, the margin-right on the last element of Set 2 is fine too.
-*/
 
 .project-image-container {
   width: 100%;
@@ -853,6 +874,7 @@
   overflow: hidden;
   margin-bottom: 1rem;
   background: #111;
+  /* Fallback bg */
 }
 
 .project-image-container img {
@@ -861,6 +883,11 @@
   object-fit: cover;
   transition: transform 0.5s ease;
   display: block;
+}
+
+.project-card img {
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .project-card:hover .project-image-container img {
@@ -884,13 +911,13 @@
 /* Desktop Adjustments */
 @media (min-width: 769px) {
   .projects-grid {
-    animation-duration: 80s;
-    /* Slower on larger screens */
+    padding: 0 2rem 2rem 2rem;
   }
 
   .project-card {
     width: 400px;
-    margin-right: 3rem;
+    /* Desktop Standard Width */
+    /* Remove margin-right since we use gap in flex */
   }
 
   .project-image-container {
@@ -911,9 +938,19 @@
     font-size: 1rem;
   }
 
+  .project-content {
+    flex-grow: 1;
+    height: 100%;
+  }
+}
+
+.project-image-container img {
+  width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.7s ease;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .project-card:hover .project-image-container img {
@@ -969,6 +1006,14 @@
 
 .project-footer {
   margin-top: auto;
+  display: flex;
+  /* Added */
+  justify-content: center;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically if needed */
+  width: 100%;
+  /* Ensure it spans full width */
 }
 
 .link-text {
@@ -1107,4 +1152,94 @@ footer {
   .hero {
     padding-top: 60px;
   }
+}
+
+.logo-img {
+  height: 24px;
+  width: auto;
+}
+
+.logo-img {
+  height: 24px;
+  width: auto;
+}
+
+/* Lightbox / Modal */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 1rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox-content img {
+  max-width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -40px;
+  right: -10px;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: transform 0.2s;
+}
+
+.lightbox-close:hover {
+  transform: scale(1.1);
+  color: var(--accent-primary);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Hover overlay for clickable images in cards */
+.image-overlay-hint {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-image-container:hover .image-overlay-hint {
+  opacity: 1;
+}
 }
