@@ -1288,3 +1288,39 @@ footer {
 .project-image-container:hover .image-overlay-hint {
   opacity: 1;
 }
+
+/* Mobile Scroll Hint */
+.mobile-scroll-hint {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-scroll-hint {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    animation: pulse-hint 2s infinite ease-in-out;
+  }
+
+  .mobile-scroll-hint svg {
+    color: var(--accent-primary);
+  }
+}
+
+@keyframes pulse-hint {
+
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(0.98);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
