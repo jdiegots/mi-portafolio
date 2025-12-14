@@ -120,53 +120,6 @@
 
 
 
-.blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(140px);
-  opacity: 0.45;
-  animation: float 20s infinite ease-in-out;
-}
-
-.blob-1 {
-  width: 900px;
-  height: 900px;
-  background: var(--accent-primary);
-  top: -15%;
-  right: -20%;
-}
-
-.blob-2 {
-  width: 1000px;
-  height: 1000px;
-  background: var(--accent-secondary);
-  top: 5%;
-  left: -25%;
-  animation-delay: -5s;
-}
-
-.blob-3 {
-  width: 800px;
-  height: 800px;
-  background: var(--accent-primary);
-  top: 35%;
-  /* Mid-page */
-  right: -25%;
-  opacity: 0.3;
-  animation-delay: -10s;
-}
-
-.blob-4 {
-  width: 900px;
-  height: 900px;
-  background: var(--accent-secondary);
-  bottom: 10%;
-  /* Near bottom */
-  left: -20%;
-  opacity: 0.35;
-  animation-delay: -15s;
-}
-
 @keyframes float {
 
   0%,
@@ -177,6 +130,85 @@
   50% {
     transform: translate(30px, -30px);
   }
+}
+
+@keyframes heartbeat-pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 0.5;
+  }
+
+  /* More evident opacity change */
+}
+
+@keyframes color-breath {
+
+  0%,
+  100% {
+    background-color: #1e1b4b;
+  }
+
+  /* Indigo 950 */
+  33% {
+    background-color: #4c1d95;
+  }
+
+  /* Violet 900 */
+  66% {
+    background-color: #9240ae;
+  }
+
+  /* Requested Purple */
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.35;
+  mix-blend-mode: normal;
+  animation: float 20s infinite ease-in-out, heartbeat-pulse 8s infinite ease-in-out, color-breath 24s infinite alternate;
+}
+
+.blob-1 {
+  width: 900px;
+  height: 900px;
+  top: -15%;
+  right: -20%;
+  animation-delay: 0s, 0s, -5s;
+}
+
+.blob-2 {
+  width: 1000px;
+  height: 1000px;
+  top: 5%;
+  left: -25%;
+  animation-delay: -5s, -2s, 0s;
+}
+
+.blob-3 {
+  width: 800px;
+  height: 800px;
+  top: 35%;
+  right: -25%;
+  opacity: 0.25;
+  animation-delay: -10s, -5s, -10s;
+}
+
+.blob-4 {
+  width: 900px;
+  height: 900px;
+  bottom: 0%;
+  left: -20%;
+  opacity: 0.3;
+  animation-delay: -15s, -8s, -15s;
 }
 
 
@@ -213,7 +245,7 @@
 .hero-kicker {
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  font-size: 0.875rem;
+  font-size: 0.70rem;
   color: var(--text-secondary);
   margin-bottom: 1.5rem;
 }
@@ -464,6 +496,19 @@
   -webkit-text-fill-color: transparent;
 }
 
+/* Simplified Gradient Text */
+.name-gradient-simple {
+  display: inline-block;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  /* Cursor text to indicate it's readable, but animations imply interactivity */
+  cursor: text;
+  /* Ensure smooth rendering */
+  will-change: transform;
+}
+
 .story-banner p {
   font-size: 1.25rem;
   /* Larger text */
@@ -637,6 +682,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
+  margin-top: 1.5rem;
 }
 
 .tool-badge {
@@ -795,52 +841,153 @@
   margin-bottom: 1rem;
 }
 
-/* Projects Grid */
-.projects-grid-wrapper {
-  width: 100%;
-  padding: 2rem 0;
-}
+/* Projects Marquee Animation */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
 
-.projects-grid {
-  display: grid;
-  gap: 2rem;
-  padding-bottom: 2rem;
-  /* Responsive grid */
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-}
-
-@media (max-width: 768px) {
-  .projects-grid {
-    grid-template-columns: 1fr;
-    /* Stack vertically on mobile */
+  100% {
+    transform: translateX(-50%);
   }
 }
 
-.project-card {
+/* Projects Horizontal Scroll (Flexbox) */
+.projects-grid-wrapper {
   width: 100%;
-  /* Fluid width */
+  padding: 2rem 0;
+  overflow: hidden;
+}
+
+.projects-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 2rem;
+  padding: 0 1.5rem 2rem 1.5rem;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  touch-action: pan-y;
+
+  /* Hide scrollbar */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
+
+  /* Prevent interaction conflicts */
+  user-select: none;
+  -webkit-user-select: none;
+  /* Ensure JS scroll is immediate */
+  scroll-behavior: auto;
+}
+
+/* Hide scrollbar for Chrome/Safari/Opera */
+.projects-grid::-webkit-scrollbar {
+  display: none;
+}
+
+/* Pause animation on hover if we use animation later, but for now just standard scroll */
+/* If marquee is still wanted, it conflicts with user asking specifically for "movable" which usually means scrollable, 
+   but "especie de carrusel" usually refers to the marquee. 
+   Wait, if it's "movable", then it should just be scrollable by user. 
+   The user said "que esa parte ... sea movible ... pero que no aparezca debajo esa especie de barra de navegación".
+   So standard horizontal scroll without scrollbar is the goal.
+*/
+
+.project-card {
+  flex: 0 0 auto;
+  /* Don't shrink */
+  width: 280px;
+  /* Mobile Width */
   display: flex;
   flex-direction: column;
   background: transparent;
   border: none;
-  transition: transform 0.3s ease;
-}
-
-.project-card:hover {
-  transform: translateY(-5px);
+  cursor: pointer;
+  /* Ensure equal height behavior is handled by parent flex align-items: stretch (default) */
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .project-image-container {
   width: 100%;
-  height: 260px;
-  /* Taller images */
+  height: 180px;
+  /* Mobile Height */
   position: relative;
-  overflow: hidden;
   border-radius: 12px;
-  /* Rounded independent of card */
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  margin-bottom: 1.5rem;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  background: #111;
+  /* Fallback bg */
+}
+
+.project-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  display: block;
+}
+
+.project-card img {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.project-card:hover .project-image-container img {
+  transform: scale(1.05);
+}
+
+.project-content h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: #fff;
+  white-space: normal;
+}
+
+.project-content p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  white-space: normal;
+}
+
+/* Desktop Adjustments */
+@media (min-width: 769px) {
+  .projects-grid {
+    padding: 0 2rem 2rem 2rem;
+  }
+
+  .project-card {
+    width: 400px;
+    /* Desktop Standard Width */
+    /* Remove margin-right since we use gap in flex */
+  }
+
+  .project-image-container {
+    height: 260px;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-tags {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-content h3 {
+    font-size: 1.5rem;
+  }
+
+  .project-content p {
+    font-size: 1rem;
+  }
+
+  .project-content {
+    flex-grow: 1;
+    height: 100%;
+  }
 }
 
 .project-image-container img {
@@ -848,6 +995,8 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.7s ease;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .project-card:hover .project-image-container img {
@@ -903,6 +1052,14 @@
 
 .project-footer {
   margin-top: auto;
+  display: flex;
+  /* Added */
+  justify-content: center;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically if needed */
+  width: 100%;
+  /* Ensure it spans full width */
 }
 
 .link-text {
@@ -1040,5 +1197,130 @@ footer {
 
   .hero {
     padding-top: 60px;
+  }
+}
+
+.logo-img {
+  height: 24px;
+  width: auto;
+}
+
+.logo-img {
+  height: 24px;
+  width: auto;
+}
+
+/* Lightbox / Modal */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 1rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox-content img {
+  max-width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -40px;
+  right: -10px;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: transform 0.2s;
+}
+
+.lightbox-close:hover {
+  transform: scale(1.1);
+  color: var(--accent-primary);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Hover overlay for clickable images in cards */
+.image-overlay-hint {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-image-container:hover .image-overlay-hint {
+  opacity: 1;
+}
+
+/* Mobile Scroll Hint */
+.mobile-scroll-hint {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-scroll-hint {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    animation: pulse-hint 2s infinite ease-in-out;
+  }
+
+  .mobile-scroll-hint svg {
+    color: var(--accent-primary);
+  }
+}
+
+@keyframes pulse-hint {
+
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(0.98);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
   }
 }
