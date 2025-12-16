@@ -17,8 +17,10 @@
   z-index: -1;
   overflow: hidden;
   background-color: var(--bg-dark);
-  /* Ensure base color is consistent */
   pointer-events: none;
+  /* Prevent flashes specifically during load/resize */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .navbar {
@@ -93,18 +95,7 @@
   min-height: 100vh;
 }
 
-/* Global Background (Scrolling) */
-.global-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  overflow: hidden;
-  background-color: var(--bg-dark);
-  pointer-events: none;
-}
+
 
 /* Hero */
 .hero {
@@ -171,10 +162,15 @@
 .blob {
   position: absolute;
   border-radius: 50%;
-  filter: blur(120px);
+  filter: blur(80px);
+  /* Reduced blur for performance */
   opacity: 0.35;
   mix-blend-mode: normal;
   animation: float 20s infinite ease-in-out, heartbeat-pulse 8s infinite ease-in-out, color-breath 24s infinite alternate;
+  will-change: transform;
+  /* Hint to browser for smoother animation */
+  transform: translateZ(0);
+  /* Force hardware acceleration */
 }
 
 .blob-1 {
@@ -852,7 +848,7 @@
   }
 }
 
-/* Projects Horizontal Scroll (Flexbox) */
+/* Projects Grid - Top Level (Mobile Default: Grid) */
 .projects-grid-wrapper {
   width: 100%;
   padding: 2rem 0;
@@ -860,27 +856,22 @@
 }
 
 .projects-grid {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  gap: 2rem;
-  padding: 0 1.5rem 2rem 1.5rem;
-  -webkit-overflow-scrolling: touch;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* 2 Columns on mobile */
+  gap: 1rem;
+  padding: 0 1rem 2rem 1rem;
   width: 100%;
-  touch-action: pan-y;
-
-  /* Hide scrollbar */
-  scrollbar-width: none;
-  /* Firefox */
-  -ms-overflow-style: none;
-  /* IE/Edge */
-
-  /* Prevent interaction conflicts */
-  user-select: none;
-  -webkit-user-select: none;
-  /* Ensure JS scroll is immediate */
-  scroll-behavior: auto;
+  /* Disable horizontal scroll properties for mobile */
+  overflow-x: visible;
 }
+
+/* Hide duplicates on mobile */
+.desktop-duplicates {
+  display: none !important;
+}
+
+/* Desktop Duplicates Logic handled via Media Query below */
 
 /* Hide scrollbar for Chrome/Safari/Opera */
 .projects-grid::-webkit-scrollbar {
@@ -896,10 +887,8 @@
 */
 
 .project-card {
-  flex: 0 0 auto;
-  /* Don't shrink */
-  width: 280px;
-  /* Mobile Width */
+  /* Mobile: Auto width to fit grid column */
+  width: auto;
   display: flex;
   flex-direction: column;
   background: transparent;
@@ -912,14 +901,16 @@
 
 .project-image-container {
   width: 100%;
-  height: 180px;
-  /* Mobile Height */
+  aspect-ratio: 16/9;
+  /* Use aspect ratio instead of fixed height for better scaling */
+  height: auto;
   position: relative;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   overflow: hidden;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   background: #111;
+  will-change: transform;
   /* Fallback bg */
 }
 
@@ -941,23 +932,53 @@
 }
 
 .project-content h3 {
-  font-size: 1.25rem;
-  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  /* Smaller title on mobile */
+  margin-bottom: 0.25rem;
   color: #fff;
   white-space: normal;
+  line-height: 1.2;
 }
 
 .project-content p {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+  /* Smaller text on mobile */
   color: var(--text-secondary);
-  line-height: 1.5;
+  line-height: 1.4;
   white-space: normal;
+  display: none;
+  /* Often too much text for small mobile grid cards, consider hiding or truncating */
+}
+
+/* Show description only if space allows, or rely on visual */
+@media (min-width: 480px) {
+  .project-content p {
+    display: block;
+  }
 }
 
 /* Desktop Adjustments */
 @media (min-width: 769px) {
+
+  /* Restore Horizontal Scroll for Desktop */
   .projects-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
     padding: 0 2rem 2rem 2rem;
+    gap: 2rem;
+    touch-action: pan-y;
+    /* Hide scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .projects-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .desktop-duplicates {
+    display: contents !important;
   }
 
   .project-card {
@@ -1035,7 +1056,6 @@
 
 .project-card h3 {
   font-size: 1.5rem;
-  /* Larger Title */
   margin-bottom: 0.75rem;
   color: #fff;
   font-weight: 600;

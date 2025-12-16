@@ -204,11 +204,10 @@ function Home() {
                                 <motion.span
                                     key={`text-${i}`}
                                     variants={{
-                                        hidden: { y: 20, opacity: 0, filter: "blur(5px)" },
+                                        hidden: { y: 20, opacity: 0 },
                                         visible: {
                                             y: 0,
                                             opacity: 1,
-                                            filter: "blur(0px)",
                                             transition: { duration: 0.4 }
                                         }
                                     }}
@@ -224,11 +223,10 @@ function Home() {
                             <motion.span
                                 className="name-gradient-simple"
                                 variants={{
-                                    hidden: { opacity: 0, y: 20, filter: "blur(5px)" },
+                                    hidden: { opacity: 0, y: 20 },
                                     visible: {
                                         opacity: 1,
                                         y: 0,
-                                        filter: "blur(0px)",
                                         transition: { duration: 0.5 }
                                     }
                                 }}
@@ -280,11 +278,7 @@ function Home() {
                 <section id="proyectos" className="section" style={{ paddingBottom: '2rem' }}>
                     <div className="container">
                         <h2 className="section-title">Mis proyectos</h2>
-                        <div className="mobile-scroll-hint">
-                            <ArrowLeft size={20} />
-                            <span>Desliza para ver más</span>
-                            <ArrowRight size={20} />
-                        </div>
+
                     </div>
 
                     <div className="projects-grid-wrapper">
@@ -362,66 +356,68 @@ function Home() {
                                 onOpenModal={setSelectedImage}
                             />
 
-                            {/* Duplicate for Marquee Loop */}
-                            <ProjectCard
-                                title="Dentro del Pleno"
-                                tags="Datos / Scrollytelling"
-                                year="2025"
-                                desc="Pieza interactiva y visual, pensada como un ejercicio de scrollytelling, que resume el año 2025 en los plenos del Congreso de los Diputados."
-                                image="/images/dentro-del-pleno.png"
-                                projectUrl="https://dentrodelpleno.pages.dev"
-                                projectLinkText="Ver Dentro del Pleno"
-                                onOpenModal={setSelectedImage}
-                            />
-                            <ProjectCard
-                                title="AforoLab"
-                                tags="Datos / Deporte"
-                                year="2025"
-                                desc="Plataforma de analítica de asistencia a los estadios de fútbol de LaLiga, con visualizaciones interactivas que permiten comparar diferentes métricas entre los clubes que componen las competiciones profesionales del fútbol español."
-                                image="/images/aforolab.png"
-                                projectUrl="https://aforolab.pages.dev"
-                                projectLinkText="Visitar AforoLab"
-                                onOpenModal={setSelectedImage}
-                            />
-                            <ProjectCard
-                                title="Kike Pérez - La mil y pico"
-                                tags="Diseño Gráfico"
-                                year="2023"
-                                desc="Diseño del cartel base de la gira y adaptaciones para distintas funciones y recintos, manteniendo una identidad visual común."
-                                image="/images/kikeperez.jpg"
-                                detailImage="/images/kikeperez.jpg"
-                                onOpenModal={setSelectedImage}
-                            />
-                            <ProjectCard
-                                title="Wordle Canario"
-                                tags="Web / Viral"
-                                year="2022"
-                                desc="Adaptación cultural del famoso juego. Logró viralidad y cobertura mediática, demostrando el poder de los productos digitales locales."
-                                image="/images/wordle-canario-web.png"
-                                projectUrl="https://wordlecanario.com"
-                                projectLinkText="Jugar al Wordle Canario"
-                                onOpenModal={setSelectedImage}
-                            />
-                            <ProjectCard
-                                title="Pasión Colchonera"
-                                tags="Branding / Social"
-                                year="2021"
-                                desc="Redifición de identidad visual para perfiles sociales. Banners, templates y línea gráfica coherente."
-                                image="/images/pasion-colchonera.webp"
-                                detailImage="/images/pasion-colchonera-banner.jpg"
-                                onOpenModal={setSelectedImage}
-                            />
-                            <ProjectCard
-                                title="Fondo Segunda"
-                                tags="Editorial / Diseño"
-                                year="2020"
-                                desc="Co-fundación de la web Fondo Segunda, medio referencia de la Segunda División del fútbol español. Diseño editorial profesional combinando diseño, estadísticas y artículos de opinión. Diseñé la Guía de la temporada 2019/20."
-                                image="/images/fondo-segunda.jpg"
-                                detailImage="/images/guia-fondo-segunda.jpeg"
-                                projectUrl="https://fondosegunda.com"
-                                projectLinkText="Visitar Fondo Segunda"
-                                onOpenModal={setSelectedImage}
-                            />
+                            {/* Duplicate for Marquee Loop (Desktop Only) */}
+                            <div className="desktop-duplicates" style={{ display: 'contents' }}>
+                                <ProjectCard
+                                    title="Dentro del Pleno"
+                                    tags="Datos / Scrollytelling"
+                                    year="2025"
+                                    desc="Pieza interactiva y visual, pensada como un ejercicio de scrollytelling, que resume el año 2025 en los plenos del Congreso de los Diputados."
+                                    image="/images/dentro-del-pleno.png"
+                                    projectUrl="https://dentrodelpleno.pages.dev"
+                                    projectLinkText="Ver Dentro del Pleno"
+                                    onOpenModal={setSelectedImage}
+                                />
+                                <ProjectCard
+                                    title="AforoLab"
+                                    tags="Datos / Deporte"
+                                    year="2025"
+                                    desc="Plataforma de analítica de asistencia a los estadios de fútbol de LaLiga, con visualizaciones interactivas que permiten comparar diferentes métricas entre los clubes que componen las competiciones profesionales del fútbol español."
+                                    image="/images/aforolab.png"
+                                    projectUrl="https://aforolab.pages.dev"
+                                    projectLinkText="Visitar AforoLab"
+                                    onOpenModal={setSelectedImage}
+                                />
+                                <ProjectCard
+                                    title="Kike Pérez - La mil y pico"
+                                    tags="Diseño Gráfico"
+                                    year="2023"
+                                    desc="Diseño del cartel base de la gira y adaptaciones para distintas funciones y recintos, manteniendo una identidad visual común."
+                                    image="/images/kikeperez.jpg"
+                                    detailImage="/images/kikeperez.jpg"
+                                    onOpenModal={setSelectedImage}
+                                />
+                                <ProjectCard
+                                    title="Wordle Canario"
+                                    tags="Web / Viral"
+                                    year="2022"
+                                    desc="Adaptación cultural del famoso juego. Logró viralidad y cobertura mediática, demostrando el poder de los productos digitales locales."
+                                    image="/images/wordle-canario-web.png"
+                                    projectUrl="https://wordlecanario.com"
+                                    projectLinkText="Jugar al Wordle Canario"
+                                    onOpenModal={setSelectedImage}
+                                />
+                                <ProjectCard
+                                    title="Pasión Colchonera"
+                                    tags="Branding / Social"
+                                    year="2021"
+                                    desc="Redifición de identidad visual para perfiles sociales. Banners, templates y línea gráfica coherente."
+                                    image="/images/pasion-colchonera.webp"
+                                    detailImage="/images/pasion-colchonera-banner.jpg"
+                                    onOpenModal={setSelectedImage}
+                                />
+                                <ProjectCard
+                                    title="Fondo Segunda"
+                                    tags="Editorial / Diseño"
+                                    year="2020"
+                                    desc="Co-fundación de la web Fondo Segunda, medio referencia de la Segunda División del fútbol español. Diseño editorial profesional combinando diseño, estadísticas y artículos de opinión. Diseñé la Guía de la temporada 2019/20."
+                                    image="/images/fondo-segunda.jpg"
+                                    detailImage="/images/guia-fondo-segunda.jpeg"
+                                    projectUrl="https://fondosegunda.com"
+                                    projectLinkText="Visitar Fondo Segunda"
+                                    onOpenModal={setSelectedImage}
+                                />
+                            </div>
 
                         </div>
                     </div>
@@ -730,7 +726,7 @@ function ProjectCard({ title, tags, year, desc, image, projectUrl, projectLinkTe
                     onClick={handleViewDetail}
                     style={{ cursor: !projectUrl ? 'pointer' : 'default' }}
                 >
-                    <img src={image} alt={title} draggable="false" />
+                    <img src={image} alt={title} draggable="false" loading="lazy" />
                     {/* Optional overlay hint for clickable images */}
                     {!projectUrl && (
                         <div className="image-overlay-hint">
