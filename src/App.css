@@ -859,9 +859,10 @@
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  /* 2 Columns on mobile */
-  gap: 1rem;
+  grid-template-columns: 1fr;
+  /* Single column "Cascade" for mobile */
+  gap: 3rem;
+  /* More breathing room for vertical stack */
   padding: 0 1rem 2rem 1rem;
   width: 100%;
   /* Disable horizontal scroll properties for mobile */
@@ -943,13 +944,14 @@
 }
 
 .project-content p {
-  font-size: 0.8rem;
-  /* Smaller text on mobile */
+  font-size: 0.95rem;
+  /* Readable size for vertical layout */
   color: var(--text-secondary);
-  line-height: 1.4;
+  line-height: 1.6;
   white-space: normal;
-  display: none;
-  /* Often too much text for small mobile grid cards, consider hiding or truncating */
+  display: block;
+  /* "Manteniendo la descripción" */
+  margin-top: 0.5rem;
 }
 
 /* Show description only if space allows, or rely on visual */
@@ -1182,6 +1184,22 @@ footer {
 }
 
 @media (max-width: 768px) {
+
+  /* Reorder sections: About ("Más allá del título") above Projects */
+  main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #sobre-mi {
+    order: -1;
+    padding-bottom: 2rem;
+  }
+
+  #proyectos {
+    order: 0;
+  }
+
   .nav-links {
     display: none;
   }
@@ -1201,45 +1219,74 @@ footer {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  /* DISABLE HEAVY ANIMATIONS ON MOBILE TO PREVENT GLITCHING */
+  /* MOBILE OPTIMIZED BACKGROUND */
+  .global-background {
+    position: absolute;
+    /* Scrolls with page ("Página larga") */
+    height: 100%;
+    width: 100%;
+    background-color: var(--bg-dark);
+    overflow: hidden;
+  }
+
+  /* BLOBS: No Blur, Gradient Only, Pulsing */
   .blob {
-    animation: none !important;
+    position: absolute;
     filter: none !important;
-    opacity: 0.15 !important;
-    background: radial-gradient(circle at center, var(--accent-primary), transparent 70%);
-    width: 100% !important;
-    height: 60vh !important;
-    left: 0 !important;
-    right: 0 !important;
-    border-radius: 0 !important;
+    /* Critical for performance */
+    border-radius: 50%;
+    mix-blend-mode: normal;
+    /* easier on GPU than other modes */
+    animation: heartbeat-pulse 8s infinite ease-in-out !important;
+    /* Keep the pulse ("Latido") */
+    opacity: 0.4 !important;
+    width: 100vw !important;
+    height: 100vw !important;
+    /* Square-ish relative to width */
+    max-width: 500px;
+    max-height: 500px;
+    left: 50% !important;
+    transform-origin: center center;
+    /* Center horizontal alignment logic in individual blobs */
   }
 
-  /* Re-position blobs statically for mobile */
+  /* Distribute blobs along the long page */
+
+  /* Blob 1: Hero Area */
   .blob-1 {
-    top: 0% !important;
-    transform: none !important;
-    background: radial-gradient(circle at 80% 20%, #4f46e5 0%, transparent 60%) !important;
+    top: -10% !important;
+    left: 50% !important;
+    transform: translateX(-50%) translateZ(0) !important;
+    background: radial-gradient(circle closest-side, rgba(99, 102, 241, 0.4), transparent 100%) !important;
+    animation-delay: 0s !important;
   }
 
+  /* Blob 2: Middle (Projects/About) */
   .blob-2 {
-    top: 30% !important;
-    transform: none !important;
-    background: radial-gradient(circle at 10% 40%, #9333ea 0%, transparent 60%) !important;
+    top: 35% !important;
+    left: -20% !important;
+    /* Offset left */
+    transform: translateZ(0) !important;
+    background: radial-gradient(circle closest-side, rgba(168, 85, 247, 0.35), transparent 100%) !important;
+    display: block !important;
+    animation-delay: -2s !important;
   }
 
+  /* Blob 3: Bottom (Story/Contact) */
   .blob-3 {
-    top: 60% !important;
-    transform: none !important;
-    background: radial-gradient(circle at 90% 70%, #4f46e5 0%, transparent 60%) !important;
+    top: 75% !important;
+    left: auto !important;
+    right: -20% !important;
+    /* Offset right */
+    transform: translateZ(0) !important;
+    background: radial-gradient(circle closest-side, rgba(99, 102, 241, 0.35), transparent 100%) !important;
+    display: block !important;
+    animation-delay: -4s !important;
   }
 
+  /* Blob 4: Extra filler if needed or plain hide */
   .blob-4 {
     display: none !important;
-  }
-
-  /* Ensure background itself is stable */
-  .global-background {
-    background-color: var(--bg-dark);
   }
 }
 
