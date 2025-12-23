@@ -204,7 +204,7 @@ function Home() {
                 <div className="container nav-content">
                     <div className="logo">DT.</div>
                     <div className="nav-links">
-                        {/* Empty matches request to remove specific links */}
+                        <a href="#contacto" className="btn-contact">{t('navbar.contact')}</a>
                     </div>
                 </div>
             </nav>
