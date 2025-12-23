@@ -1,0 +1,85 @@
+/* Language Top Bar */
+.lang-top-bar {
+    position: fixed;
+    /* Changed to fixed so it stays relative to viewport */
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    /* Centered content */
+    align-items: center;
+    padding: 0 1rem;
+    z-index: 1100;
+    /* Higher than navbar */
+    background: transparent;
+    backdrop-filter: blur(5px);
+    /* Subtle glass */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.lang-top-bar.hidden {
+    opacity: 0;
+    transform: translateY(-100%);
+    pointer-events: none;
+}
+
+.lang-switcher {
+    display: inline-flex;
+    gap: 15px;
+    /* More space for flags */
+    align-items: center;
+}
+
+.lang-switcher button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    padding: 0.25rem 0.5rem;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 4px;
+}
+
+.lang-switcher button:hover,
+.lang-switcher button.active {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    font-weight: 600;
+}
+
+.lang-flag {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    border-radius: 50%;
+    /* Optional: ensure round look if image isn't perfect */
+    display: inline-block;
+}
+
+.lang-separator {
+    color: var(--text-secondary);
+    opacity: 0.3;
+}
+
+/* Navbar Placement */
+/* Initially (not scrolled), navbar sits below the 40px lang bar */
+.navbar {
+    top: 40px !important;
+    /* Force override initial top */
+    transition: top 0.3s ease, background 0.3s ease, height 0.3s ease, padding 0.3s ease;
+}
+
+/* When scrolled, .navbar moves up to top: 0 */
+.navbar.scrolled {
+    top: 0 !important;
+}
+
+/* When scrolled, .navbar goes to top: 0 (defined below or in existing CSS) */
+/* Existing .navbar has `top: 0`. We need to override it conditionally or via class in React */

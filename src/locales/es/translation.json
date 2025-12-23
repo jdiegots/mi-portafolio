@@ -1,0 +1,91 @@
+{
+    "navbar": {
+        "projects": "Mis proyectos",
+        "about": "Sobre mí",
+        "story": "Mi historia",
+        "tools": "Herramientas",
+        "experience": "Trayectoria",
+        "contact": "Contacto"
+    },
+    "navigation": {
+        "scroll_left": "Desplazar a la izquierda",
+        "scroll_right": "Desplazar a la derecha"
+    },
+    "hero": {
+        "role": "Técnico de datos y comunicación",
+        "sub_role": "Data storytelling y contenido creativo",
+        "lead": "Diseño, datos y estrategia para comunicar con sentido.",
+        "cta_projects": "Ver Proyectos",
+        "cta_talk": "Hablemos",
+        "greeting": "Hola, soy",
+        "name": "Diego Tejera :)"
+    },
+    "axes": {
+        "data_title": "DATOS",
+        "data_desc": "Trabajo datos para convertirlos en entregables claros y sólidos. Limpieza, consistencia y visualización para que lo publicado sea comprensible y defendible.",
+        "data_cta": "Ver el método",
+        "product_title": "PRODUCTO",
+        "product_desc": "Construyo productos digitales que guían y enganchan. Jerarquía, ritmo y microdetalles para facilitar la exploración y crear experiencias escalables.",
+        "product_cta": "Ver el enfoque",
+        "creative_title": "CONTENIDO CREATIVO",
+        "creative_desc": "Contenido con identidad y enfoque en resultados. Estructura, estética y ritmo para sostener la atención. El formato cambia, el criterio permanece.",
+        "creative_cta": "Ver el montaje"
+    },
+    "sections": {
+        "projects_title": "Mis proyectos",
+        "about_title": "Más allá del título",
+        "about_intro": "Soy graduado en <1>Ciencia Política y de la Administración</1>, y mi pasión está en la intersección entre lo <3>digital</3> y lo <5>institucional</5>. Me muevo cómodo entre documentos técnicos, hojas de cálculo, normativa, expedientes y líneas de tiempo de vídeo.",
+        "about_translator": "En entornos donde la información suele ser densa, mi trabajo es actuar como <1>\"traductor\"</1>, convirtiendo datos, normas y documentos en algo claro, visual y útil, que se entienda rápido y llegue a quien tiene que llegar.",
+        "about_autodidact": "Muchas de las habilidades que uso hoy las he aprendido de forma <1>autodidacta</1>. Suelo explorar por mi cuenta cualquier herramienta nueva, entender su lógica y adaptarla rápidamente a lo que necesito. Aprendo probando, entendiendo el sistema y aplicándolo a proyectos reales.",
+        "story_title": "Empecé metiéndome donde no sabía... y encontrando cómo hacerlo funcionar",
+        "story_desc": "Hacía diseños, inventaba bases de datos y contaba historias sin saber por qué. Años después entendí que ya estaba construyendo mi forma de pensar.",
+        "story_cta": "Un poco de mi historia",
+        "tools_title": "Mis herramientas",
+        "experience_title": "Trayectoria",
+        "contact_title": "¿Hablamos?",
+        "contact_lead": "Estoy disponible ;)",
+        "send_email": "Enviar correo",
+        "tools_design_title": "Diseño y vídeo",
+        "tools_design_desc": "Creación de contenido visual de alto impacto y gestión de formatos virales.",
+        "tools_data_title": "Datos y análisis",
+        "tools_data_desc": "Capacidad para transformar datos brutos en insights claros para la toma de decisiones.",
+        "tools_management_title": "Gestión y comunicación",
+        "tools_management_desc": "Perfil administrativo con soltura en herramientas de organización y redacción técnica."
+    },
+    "projects": {
+        "dentro_del_pleno": {
+            "desc": "Pieza interactiva y visual, pensada como un ejercicio de scrollytelling, que resume el año 2025 en los plenos del Congreso de los Diputados.",
+            "link": "Ver Dentro del Pleno"
+        },
+        "aforolab": {
+            "desc": "Plataforma de analítica de asistencia a los estadios de fútbol de LaLiga, con visualizaciones interactivas que permiten comparar diferentes métricas entre los clubes que componen las competiciones profesionales del fútbol español.",
+            "link": "Visitar AforoLab"
+        },
+        "kike_perez": {
+            "desc": "Diseño del cartel base de la gira y adaptaciones para distintas funciones y recintos, manteniendo una identidad visual común."
+        },
+        "wordle_canario": {
+            "desc": "Versión canaria del juego original: un proyecto ligero y cotidiano que convirtió el léxico canario en un hábito compartido. Adivina la palabra en seis intentos.",
+            "link": "Jugar al Wordle Canario"
+        },
+        "pasion_colchonera": {
+            "desc": "Pasión Colchonera fue un trabajo de branding para un proyecto deportivo en redes, donde desarrollé piezas clave de identidad y presencia visual: diseños para Instagram, banner de Twitter, foto de perfil y recursos para historias destacadas."
+        },
+        "fondo_segunda": {
+            "desc": "Co-fundación de la web Fondo Segunda, medio referencia de la Segunda División del fútbol español. Diseño editorial profesional combinando diseño, estadísticas y artículos de opinión. Maqueté y trabajé en el diseño de la Guía de la temporada 2019/20.",
+            "link": "Visitar Fondo Segunda"
+        }
+    },
+    "timeline": {
+        "practices": {
+            "role": "Trabajo técnico-institucional",
+            "place": "Prácticas · Desarrollo y Comunicación",
+            "desc": "Soporte integral en tareas de comunicación y gestión técnica: redacción y maquetación de documentos, notas de prensa y administración de redes sociales. Realización de todo el ciclo de análisis de datos para informes y encuestas (recogida, depuración y visualización) y sintetización de normativas y convocatorias en criterios claros. Colaboración activa en la coordinación interna y con otras entidades."
+        },
+        "degree": {
+            "role": "Grado en Ciencia Política y de la Administración",
+            "place": "Universidade de Santiago de Compostela",
+            "desc": "Formación con fuerte carga metodológica y analítica. Especialización en estadística aplicada y técnicas de investigación social (cuantitativas y cualitativas), combinada con el estudio profundo de la gestión pública, la estrategia política y la comunicación. Análisis de decisiones, comportamiento electoral y evaluación de políticas públicas."
+        }
+    }
+}

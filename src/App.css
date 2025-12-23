@@ -14,7 +14,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: -1;
+  z-index: -2;
   overflow: hidden;
   background-color: var(--bg-dark);
   pointer-events: none;
@@ -25,7 +25,7 @@
 
 .navbar {
   position: fixed;
-  top: 0;
+  /* top: 0; Overridden by LanguageBar.css */
   left: 0;
   right: 0;
   height: 80px;
@@ -208,6 +208,8 @@
   opacity: 0.3;
   animation-delay: -15s, -8s, -15s;
 }
+
+
 
 
 .hero-content {
@@ -964,10 +966,12 @@
 /* Desktop Adjustments */
 @media (min-width: 769px) {
 
-  /* Restore Horizontal Scroll for Desktop */
+  /* Modern Grid for Desktop */
   .projects-grid {
-    display: flex;
-    flex-wrap: nowrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 3rem;
+    padding: 0 2rem 4rem 2rem;
     overflow-x: auto;
     padding: 0 2rem 2rem 2rem;
     gap: 2rem;
@@ -977,22 +981,59 @@
     -ms-overflow-style: none;
   }
 
-  .projects-grid::-webkit-scrollbar {
-    display: none;
+  .node-projects-list {
+    margin-top: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    /* Horizontal row */
+    gap: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    /* Space for scrollbar if any */
+    scroll-behavior: smooth;
+    align-items: stretch;
+    /* Ensure all cards have equal height */
+    /* Hide scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
+  /* Buttons for manual scroll */
+  .projects-scroll-arrow {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s;
+    z-index: 10;
+  }
+
+  .projects-scroll-arrow:hover {
+    background: var(--accent-primary);
+  }
+
+  /* HorizontalCards.css handles desktop layout styles now */
+
   .desktop-duplicates {
-    display: contents !important;
+    display: none !important;
   }
 
   .project-card {
-    width: 400px;
-    /* Desktop Standard Width */
-    /* Remove margin-right since we use gap in flex */
+    width: 100%;
+    /* Fill grid cell */
+    min-width: 0;
   }
 
   .project-image-container {
-    height: 260px;
+    height: auto;
+    aspect-ratio: 16/9;
     margin-bottom: 1.5rem;
   }
 
@@ -1432,5 +1473,146 @@ footer {
   50% {
     opacity: 1;
     transform: scale(1.02);
+  }
+}
+
+/* Core Axes Section (Nodes) */
+.core-axes-section {
+  position: relative;
+  padding: 8rem 0;
+  /* More space */
+  overflow: visible;
+  /* Allow connections to bleed if needed */
+}
+
+.core-axes-container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1000px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+/* Node Styles */
+.core-node {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  text-align: center;
+  padding: 1rem;
+  /* Hover effect remains simple */
+  cursor: default;
+  transition: transform 0.4s;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Ensure header content stays at top, projects follow */
+}
+
+
+.core-node:hover {
+  transform: translateY(-5px);
+}
+
+.node-icon {
+  display: inline-flex;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+  /* Neutral by default */
+  transition: all 0.4s ease;
+}
+
+.core-node:hover .node-icon {
+  color: var(--accent-primary);
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.4));
+}
+
+.core-node h3 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #fff;
+  transition: color 0.3s;
+}
+
+.core-node:hover h3 {
+  color: var(--accent-primary);
+}
+
+.core-node p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  text-align: center;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+/* Node CTA (Link) */
+.node-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.85rem;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  transform: translateY(10px);
+  text-decoration: none;
+  /* Ensure no underline */
+}
+
+/* Hover/Focus State for Desktop */
+.core-node:hover .node-cta,
+.core-node:focus-within .node-cta {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.node-cta:hover {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+}
+
+/* Mobile Layout */
+@media (max-width: 768px) {
+  .core-axes-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+  }
+
+  /* Simple vertical connectors */
+  .core-node::after {
+    content: '';
+    position: absolute;
+    bottom: -2.5rem;
+    left: 50%;
+    height: 1.5rem;
+    width: 1px;
+    border-left: 1px dashed var(--text-secondary);
+    opacity: 0.3;
+  }
+
+  .core-node:last-child::after {
+    display: none;
+  }
+
+  .node-cta {
+    opacity: 1 !important;
+    transform: none !important;
+    margin-top: 1.5rem;
   }
 }

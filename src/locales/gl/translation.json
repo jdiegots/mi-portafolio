@@ -1,0 +1,91 @@
+{
+    "navbar": {
+        "projects": "Os meus proxectos",
+        "about": "Sobre min",
+        "story": "A miña historia",
+        "tools": "Ferramentas",
+        "experience": "Traxectoría",
+        "contact": "Contacto"
+    },
+    "navigation": {
+        "scroll_left": "Desprazar á esquerda",
+        "scroll_right": "Desprazar á dereita"
+    },
+    "hero": {
+        "role": "Técnico de datos e comunicación",
+        "sub_role": "Data storytelling e contido creativo",
+        "lead": "Deseño, datos e estratexia para comunicar con sentido.",
+        "cta_projects": "Ver Proxectos",
+        "cta_talk": "Falemos",
+        "greeting": "Ola, son",
+        "name": "Diego Tejera :)"
+    },
+    "axes": {
+        "data_title": "DATOS",
+        "data_desc": "Traballo datos para convertelos en entregables claros e sólidos. Limpeza, consistencia e visualización para que o publicado sexa comprensible e defendible.",
+        "data_cta": "Ver o método",
+        "product_title": "PRODUTO",
+        "product_desc": "Construo produtos dixitais que guían e enganchan. Xerarquía, ritmo e microdetalles para facilitar a exploración e crear experiencias escalables.",
+        "product_cta": "Ver o enfoque",
+        "creative_title": "CONTIDO CREATIVO",
+        "creative_desc": "Contido con identidade e enfoque en resultados. Estrutura, estética e ritmo para soster a atención. O formato cambia, o criterio permanece.",
+        "creative_cta": "Ver a montaxe"
+    },
+    "sections": {
+        "projects_title": "Os meus proxectos",
+        "about_title": "Máis alá do título",
+        "about_intro": "Son graduado en <1>Ciencia Política e da Administración</1>, e a miña paixón está na intersección entre o <3>dixital</3> e o <5>institucional</5>. Móvome cómodo entre documentos técnicos, follas de cálculo, normativa, expedientes e liñas de tempo de vídeo.",
+        "about_translator": "En contornas onde a información adoita ser densa, o meu traballo é actuar como <1>\"tradutor\"</1>, convertendo datos, normas e documentos en algo claro, visual e útil, que se entenda rápido e chegue a quen ten que chegar.",
+        "about_autodidact": "Moitas das habilidades que uso hoxe aprendinas de forma <1>autodidacta</1>. Adoito explorar pola miña conta calquera ferramenta nova, entender a súa lóxica e adaptala rapidamente ao que necesito. Aprendo probando, entendendo o sistema e aplicándoo a proxectos reais.",
+        "story_title": "Empecei meténdome onde non sabía... e atopando como facelo funcionar",
+        "story_desc": "Facía deseños, inventaba bases de datos e contaba historias sen saber por que. Años despois entendín que xa estaba a construír a miña forma de pensar.",
+        "story_cta": "Un pouco da miña historia",
+        "tools_title": "As miñas ferramentas",
+        "experience_title": "Traxectoría",
+        "contact_title": "Falamos?",
+        "contact_lead": "Estou dispoñible ;)",
+        "send_email": "Enviar correo",
+        "tools_design_title": "Deseño e vídeo",
+        "tools_design_desc": "Creación de contido visual de alto impacto e xestión de formatos virais.",
+        "tools_data_title": "Datos e análise",
+        "tools_data_desc": "Capacidade para transformar datos brutos en insights claros para a toma de decisións.",
+        "tools_management_title": "Xestión e comunicación",
+        "tools_management_desc": "Perfil administrativo con soltura en ferramentas de organización e redacción técnica."
+    },
+    "projects": {
+        "dentro_del_pleno": {
+            "desc": "Peza interactiva e visual, pensada como un exercicio de scrollytelling, que resume o ano 2025 nos plenos do Congreso dos Deputados.",
+            "link": "Ver Dentro del Pleno"
+        },
+        "aforolab": {
+            "desc": "Plataforma de analítica de asistencia aos estadios de fútbol de LaLiga, con visualizacións interactivas que permiten comparar diferentes métricas entre os clubs que compoñen as competicións profesionais do fútbol español.",
+            "link": "Visitar AforoLab"
+        },
+        "kike_perez": {
+            "desc": "Deseño do cartel base da xira e adaptacións para distintas funcións e recintos, mantendo unha identidade visual común."
+        },
+        "wordle_canario": {
+            "desc": "Versión canaria do xogo orixinal: un proxecto lixeiro e cotián que converteu o léxico canario nun hábito compartido. Adiviña a palabra en seis intentos.",
+            "link": "Xogar ao Wordle Canario"
+        },
+        "pasion_colchonera": {
+            "desc": "Pasión Colchonera foi un traballo de branding para un proxecto deportivo en redes, onde desenvolví pezas clave de identidade e presenza visual: deseños para Instagram, banner de Twitter, foto de perfil e recursos para historias destacadas."
+        },
+        "fondo_segunda": {
+            "desc": "Co-fundación da web Fondo Segunda, medio referencia da Segunda División do fútbol español. Deseño editorial profesional combinando deseño, estatísticas e artigos de opinión. Maquetei e traballei no deseño da Guía da tempada 2019/20.",
+            "link": "Visitar Fondo Segunda"
+        }
+    },
+    "timeline": {
+        "practices": {
+            "role": "Traballo técnico-institucional",
+            "place": "Prácticas · Desenvolvemento e Comunicación",
+            "desc": "Soporte integral en tarefas de comunicación e xestión técnica: redacción e maquetación de documentos, notas de prensa e administración de redes sociais. Realización de todo o ciclo de análise de datos para informes e enquisas (recollida, depuración e visualización) e sintetización de normativas e convocatorias en criterios claros. Colaboración activa na coordinación interna e con outras entidades."
+        },
+        "degree": {
+            "role": "Grao en Ciencia Política e da Administración",
+            "place": "Universidade de Santiago de Compostela",
+            "desc": "Formación con forte carga metodolóxica e analítica. Especialización en estatística aplicada e técnicas de investigación social (cuantitativas e cualitativas), combinada co estudo profundo da xestión pública, a estratexia política e a comunicación. Análise de decisións, comportamento electoral e avaliación de políticas públicas."
+        }
+    }
+}

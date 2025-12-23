@@ -1,0 +1,91 @@
+{
+    "navbar": {
+        "projects": "Projects",
+        "about": "About me",
+        "story": "My story",
+        "tools": "Tools",
+        "experience": "Experience",
+        "contact": "Contact"
+    },
+    "navigation": {
+        "scroll_left": "Scroll left",
+        "scroll_right": "Scroll right"
+    },
+    "hero": {
+        "role": "Data Technician and Communication",
+        "sub_role": "Data storytelling and creative content",
+        "lead": "Design, data, and strategy to communicate with purpose.",
+        "cta_projects": "View Projects",
+        "cta_talk": "Let's Talk",
+        "greeting": "Hi, I'm",
+        "name": "Diego Tejera :)"
+    },
+    "axes": {
+        "data_title": "DATA",
+        "data_desc": "I process data to turn it into clear and solid deliverables. Cleaning, consistency, and visualization so that what is published is understandable and defensible.",
+        "data_cta": "See the method",
+        "product_title": "PRODUCT",
+        "product_desc": "I build digital products that guide and engage. Hierarchy, rhythm, and micro-details to facilitate exploration and create scalable experiences.",
+        "product_cta": "See the approach",
+        "creative_title": "CREATIVE CONTENT",
+        "creative_desc": "Content with identity and a focus on results. Structure, aesthetics, and pacing to sustain attention. The format changes, the criteria remain.",
+        "creative_cta": "See the montage"
+    },
+    "sections": {
+        "projects_title": "My projects",
+        "about_title": "Beyond the title",
+        "about_intro": "I hold a degree in <1>Political Science and Administration</1>, and my passion lies at the intersection of the <3>digital</3> and the <5>institutional</5>. I move comfortably between technical documents, spreadsheets, regulations, files, and video timelines.",
+        "about_translator": "In environments where information tends to be dense, my job is to act as a <1>\"translator\"</1>, turning data, rules, and documents into something clear, visual, and useful, that is quickly understood and reaches those it needs to reach.",
+        "about_autodidact": "Many of the skills I use today I have learned <1>autodidactically</1>. I usually explore any new tool on my own, understand its logic, and adapt it quickly to what I need. I learn by testing, understanding the system, and applying it to real projects.",
+        "story_title": "I started getting into things I didn't know... and figuring out how to make them work",
+        "story_desc": "I made designs, invented databases, and told stories without knowing why. Years later I understood that I was already building my way of thinking.",
+        "story_cta": "A bit of my story",
+        "tools_title": "My tools",
+        "experience_title": "Experience",
+        "contact_title": "Let's talk?",
+        "contact_lead": "I'm available ;)",
+        "send_email": "Send email",
+        "tools_design_title": "Design & Video",
+        "tools_design_desc": "Creating high-impact visual content and managing viral formats.",
+        "tools_data_title": "Data & Analysis",
+        "tools_data_desc": "Ability to transform raw data into clear insights for decision-making.",
+        "tools_management_title": "Management & Communication",
+        "tools_management_desc": "Administrative profile fluent in organizational tools and technical writing."
+    },
+    "projects": {
+        "dentro_del_pleno": {
+            "desc": "Interactive and visual piece, designed as a scrollytelling exercise, summarizing the year 2025 in the plenary sessions of the Congress of Deputies.",
+            "link": "See Dentro del Pleno"
+        },
+        "aforolab": {
+            "desc": "LaLiga stadium attendance analytics platform, with interactive visualizations allowing comparison of different metrics between clubs in Spanish professional football competitions.",
+            "link": "Visit AforoLab"
+        },
+        "kike_perez": {
+            "desc": "Design of the basic tour poster and adaptations for different functions and venues, maintaining a common visual identity."
+        },
+        "wordle_canario": {
+            "desc": "Canarian version of the original game: a light and daily project that turned Canarian vocabulary into a shared habit. Guess the word in six attempts.",
+            "link": "Play Wordle Canario"
+        },
+        "pasion_colchonera": {
+            "desc": "Pasión Colchonera was a branding job for a sports project on social media, where I developed key identity pieces and visual presence: designs for Instagram, Twitter banner, profile picture, and resources for highlights."
+        },
+        "fondo_segunda": {
+            "desc": "Co-foundation of the Fondo Segunda website, a reference medium for the Second Division of Spanish football. Professional editorial design combining design, statistics, and opinion articles. I laid out and worked on the design of the 2019/20 Season Guide.",
+            "link": "Visit Fondo Segunda"
+        }
+    },
+    "timeline": {
+        "practices": {
+            "role": "Technical-Institutional Work",
+            "place": "Internship · Development and Communication",
+            "desc": "Integral support in communication and technical management tasks: drafting and layout of documents, press releases, and social media administration. Execution of the entire data analysis cycle for reports and surveys (collection, cleaning, and visualization) and synthesis of regulations and calls into clear criteria. Active collaboration in internal coordination and with other entities."
+        },
+        "degree": {
+            "role": "Degree in Political Science and Administration",
+            "place": "University of Santiago de Compostela",
+            "desc": "Training with a strong methodological and analytical load. Specialization in applied statistics and social research techniques (quantitative and qualitative), combined with deep study of public management, political strategy, and communication. Decision analysis, electoral behavior, and public policy evaluation."
+        }
+    }
+}

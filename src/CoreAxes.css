@@ -1,0 +1,107 @@
+/* Main Container */
+.core-axes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    /* Spacing between sections */
+    width: 100%;
+}
+
+/* Row Wrapper */
+.core-axis-row {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Block (Alargado) */
+.core-header-wide {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    /* Gap between header and projects */
+    transition: all 0.3s ease;
+}
+
+.core-header-wide:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.header-content-left {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.header-icon-wrapper {
+    /* Optional wrapper if we want circular bg or something */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-text h3 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+}
+
+.header-text p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+    /* Optional: Clamp text if too long? */
+}
+
+/* Hide description on mobile if very tight? Or keep it? kept for now */
+
+.header-cta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent-primary);
+    white-space: nowrap;
+    padding-left: 1rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    height: 40px;
+    margin-left: 1rem;
+}
+
+.header-cta:hover {
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .core-header-wide {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1.5rem;
+    }
+
+    .header-content-left {
+        width: 100%;
+        /* flex-direction: column? No, icon+text inline is usually fine */
+    }
+
+    .header-cta {
+        margin-left: 0;
+        border-left: none;
+        padding-left: 0;
+        width: 100%;
+        justify-content: flex-end;
+    }
+}

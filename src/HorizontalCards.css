@@ -1,0 +1,108 @@
+/* Horizontal Wide Cards for Core Axes */
+.node-projects-list .project-card {
+    min-width: 500px;
+    /* Wide card */
+    width: 500px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+    padding: 0;
+    /* No padding on outer container to let image flush? Or padding internal? Let's use internal padding/layout */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: row !important;
+    /* Force horizontal */
+    justify-content: flex-start;
+    align-items: stretch;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.node-projects-list .project-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.node-projects-list .project-image-container {
+    width: 200px;
+    /* Fixed width for image part */
+    min-width: 200px;
+    height: auto;
+    /* Stretch height */
+    margin-bottom: 0;
+    /* Remove bottom margin */
+    border-radius: 12px 0 0 12px;
+    /* Rounded only on left */
+    border: none;
+    background: #111;
+}
+
+.node-projects-list .project-image-container img {
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.node-projects-list .project-content {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    /* Take remaining space */
+    align-items: flex-start;
+    text-align: left;
+}
+
+.node-projects-list .project-header {
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.node-projects-list .project-content h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+}
+
+.node-projects-list .project-content p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+    /* Limit text lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Mobile Adjustments for these specific wide cards */
+@media (max-width: 768px) {
+    .node-projects-list .project-card {
+        min-width: 85vw;
+        /* Almost full width on mobile scroll */
+        width: 85vw;
+        flex-direction: column !important;
+        /* Stack again on very small screens? Or keep horizontal if small enough? 
+       User said "ocupan ... alargado". Horizontal on mobile might squeezed content. 
+       Let's keep them column on mobile? Or wide column?
+       Actually, standard horizontal scroll cards on mobile usually work best as columns (vertical card, horizontal scroll).
+       BUT user explicitly asked for "alargado". 
+       Let's try to keep them row on mobile? 
+       No, 85vw makes them readable. flex-direction: column might be better for mobile height efficiency? 
+       User said "que ocupe lo menos de altura posible".
+       Row is shorter in height than Column? No, column is taller. 
+       So Row is better for height efficiency. 
+       Let's try to keep Flex Row even on mobile, but smaller image.
+    */
+        flex-direction: row !important;
+    }
+
+    .node-projects-list .project-image-container {
+        width: 120px;
+        min-width: 120px;
+    }
+}
