@@ -204,12 +204,7 @@ function Home() {
                 <div className="container nav-content">
                     <div className="logo">DT.</div>
                     <div className="nav-links">
-                        <a href="#proyectos">{t('navbar.projects')}</a>
-                        <a href="#sobre-mi">{t('navbar.about')}</a>
-                        <a href="#mi-historia">{t('navbar.story')}</a>
-                        <a href="#herramientas">{t('navbar.tools')}</a>
-                        <a href="#experiencia">{t('navbar.experience')}</a>
-                        <a href="#contacto" className="btn-contact">{t('navbar.contact')}</a>
+                        {/* Empty matches request to remove specific links */}
                     </div>
                 </div>
             </nav>
@@ -694,15 +689,74 @@ function Home() {
                 </div>
             </footer>
 
-            {/* Lightbox Modal */}
+            {/* Modal for Project Details */}
             {
                 selectedImage && (
-                    <div className="lightbox" onClick={() => setSelectedImage(null)}>
-                        <div className="lightbox-content" onClick={e => e.stopPropagation()}>
-                            <button className="lightbox-close" onClick={() => setSelectedImage(null)}>
-                                <X size={24} />
+                    <div className="lightbox" onClick={() => setSelectedImage(null)} style={{ zIndex: 10000 }}>
+                        <div
+                            className="lightbox-content project-detail-modal"
+                            onClick={e => e.stopPropagation()}
+                            style={{
+                                background: '#111',
+                                border: '1px solid rgba(255,255,255,0.1)',
+                                borderRadius: '16px',
+                                padding: '0',
+                                maxWidth: '900px',
+                                width: '90%',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                overflow: 'hidden',
+                                position: 'relative'
+                            }}
+                        >
+                            <button
+                                className="lightbox-close"
+                                onClick={() => setSelectedImage(null)}
+                                style={{
+                                    position: 'absolute',
+                                    top: '1rem',
+                                    right: '1rem',
+                                    background: 'rgba(0,0,0,0.5)',
+                                    border: 'none',
+                                    borderRadius: '50%',
+                                    width: '32px',
+                                    height: '32px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    color: '#fff',
+                                    cursor: 'pointer',
+                                    zIndex: 10
+                                }}
+                            >
+                                <X size={20} />
                             </button>
-                            <img src={selectedImage} alt="Vista detallada" />
+
+                            {/* Image Part */}
+                            {selectedImage.image && (
+                                <div className="modal-image-wrapper" style={{ width: '100%', maxHeight: '50vh', overflow: 'hidden', background: '#000' }}>
+                                    <img
+                                        src={selectedImage.image}
+                                        alt={selectedImage.title || "Project"}
+                                        style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                                    />
+                                </div>
+                            )}
+
+                            {/* Text Part */}
+                            <div className="modal-text-content" style={{ padding: '2rem' }}>
+                                {selectedImage.tags && (
+                                    <div style={{ color: 'var(--accent-primary)', fontSize: '0.9rem', marginBottom: '0.5rem', fontWeight: 600 }}>
+                                        {selectedImage.tags} — {selectedImage.year}
+                                    </div>
+                                )}
+                                <h3 style={{ fontSize: '2rem', marginBottom: '1rem', lineHeight: 1.2 }}>
+                                    {selectedImage.title}
+                                </h3>
+                                <p style={{ fontSize: '1rem', lineHeight: 1.6, color: 'var(--text-secondary)' }}>
+                                    {selectedImage.desc}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 )
@@ -784,29 +838,31 @@ function TimelineItem({ role, place, period, description }) {
 
 function ProjectCard({ title, tags, year, desc, image, projectUrl, projectLinkText, detailImage, onOpenModal }) {
 
-    // Handler for viewing detail
-    const handleViewDetail = (e) => {
-        if (!projectUrl && onOpenModal && (detailImage || image)) {
-            e.preventDefault();
-            onOpenModal(detailImage || image);
-        }
+    // Handler for clicking the card itself (opens modal)
+    const handleCardClick = () => {
+        onOpenModal({
+            title,
+            desc,
+            image: detailImage || image,
+            tags,
+            year
+        });
     };
 
     return (
-        <motion.div className="project-card" whileHover={{ y: -5 }}>
+        <motion.div
+            className="project-card"
+            whileHover={{ y: -5 }}
+            onClick={handleCardClick}
+            style={{ cursor: 'pointer' }}
+        >
             {image && (
-                <div
-                    className="project-image-container"
-                    onClick={handleViewDetail}
-                    style={{ cursor: !projectUrl ? 'pointer' : 'default' }}
-                >
+                <div className="project-image-container">
                     <img src={image} alt={title} draggable="false" loading="lazy" />
-                    {/* Optional overlay hint for clickable images */}
-                    {!projectUrl && (
-                        <div className="image-overlay-hint">
-                            <Maximize2 size={24} color="#fff" />
-                        </div>
-                    )}
+                    <div className="image-overlay-hint">
+                        {/* Hint icon always visible on hover via CSS, generic 'maximize' */}
+                        <Maximize2 size={24} color="#fff" />
+                    </div>
                 </div>
             )}
             <div className="project-content">
@@ -818,19 +874,41 @@ function ProjectCard({ title, tags, year, desc, image, projectUrl, projectLinkTe
                 <p>{desc}</p>
 
                 <div className="project-footer">
-                    {/* If it's a web project, show standard link. If it's design, show "Ver imagen/detalle" triggering modal */}
-                    {projectUrl ? (
-                        <a href={projectUrl} target="_blank" rel="noopener noreferrer" className="link-text" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                    {/* Primary Button for URL if exists. Stops propagation to avoid opening modal when clicking link. */}
+                    {projectUrl && (
+                        <a
+                            href={projectUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-project-link" // New class for visible button style
+                            onClick={(e) => e.stopPropagation()}
+                            style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '8px',
+                                background: 'rgba(255,255,255,0.1)',
+                                padding: '8px 16px',
+                                borderRadius: '6px',
+                                textDecoration: 'none',
+                                color: '#fff',
+                                fontWeight: 600,
+                                fontSize: '0.9rem',
+                                border: '1px solid rgba(255,255,255,0.1)',
+                                transition: 'all 0.2s'
+                            }}
+                        >
                             {projectLinkText || "Visitar web"} <ExternalLink size={14} />
                         </a>
-                    ) : (
-                        <button
-                            className="link-text-btn"
-                            onClick={(e) => { e.preventDefault(); onOpenModal(detailImage || image); }}
-                            style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.25rem', color: '#fff', fontSize: '0.9rem', fontWeight: 600 }}
-                        >
-                            Ver proyecto <Maximize2 size={14} />
-                        </button>
+                    )}
+
+                    {/* If no URL, maybe Show 'Ver Detalles' text? Or just rely on card click context? 
+                        User asked for a button for "Visitar..." but implies the rest of the card opens modal.
+                        For consistency, maybe no extra button if no URL, just the card click.
+                    */}
+                    {!projectUrl && (
+                        <span className="link-text-btn" style={{ opacity: 0.7, fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                            Ver detalles <Maximize2 size={14} />
+                        </span>
                     )}
                 </div>
             </div>
