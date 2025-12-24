@@ -1,7 +1,7 @@
 {
     "navbar": {
         "projects": "Projects",
-        "about": "About me",
+        "about": "About",
         "story": "My story",
         "tools": "Tools",
         "experience": "Experience",
@@ -12,89 +12,91 @@
         "scroll_right": "Scroll right"
     },
     "hero": {
-        "role": "Data Technician and Communication",
+        "role": "Data & Communications Specialist",
         "sub_role": "Data storytelling and creative content",
-        "lead": "Design, data, and strategy to communicate with purpose.",
-        "cta_projects": "View Projects",
-        "cta_talk": "Let's Talk",
+        "lead": "Design, data and strategy to communicate with purpose.",
+        "cta_projects": "View projects",
+        "cta_talk": "Let’s talk",
         "greeting": "Hi, I'm",
         "name": "Diego Tejera :)"
     },
     "axes": {
+        "all_title": "ALL",
+        "allprojects_desc": "Projects, pieces and experiments",
         "data_title": "DATA",
-        "data_desc": "I process data to turn it into clear and solid deliverables. Cleaning, consistency, and visualization so that what is published is understandable and defensible.",
+        "data_desc": "I work with data to turn it into clear, solid deliverables. Cleaning, consistency and visualization so what’s published is understandable and defensible.",
         "data_cta": "See the method",
         "product_title": "PRODUCT",
-        "product_desc": "I build digital products that guide and engage. Hierarchy, rhythm, and micro-details to facilitate exploration and create scalable experiences.",
+        "product_desc": "I build digital products that guide and engage. Hierarchy, rhythm and micro-details to make exploration easy and create scalable experiences.",
         "product_cta": "See the approach",
         "creative_title": "CREATIVE\nCONTENT",
-        "creative_desc": "Content with identity and a focus on results. Structure, aesthetics, and pacing to sustain attention. The format changes, the criteria remain.",
-        "creative_cta": "See the montage"
+        "creative_desc": "Content with identity and a results-driven focus. Structure, aesthetics and pacing to sustain attention. Formats change, the criteria stays.",
+        "creative_cta": "See the cut"
     },
     "sections": {
-        "projects_title": "My projects",
-        "about_title": "Beyond the title",
-        "about_intro": "I hold a degree in <1>Political Science and Administration</1>, and my passion lies at the intersection of the <3>digital</3> and the <5>institutional</5>. I move comfortably between technical documents, spreadsheets, regulations, files, and video timelines.",
-        "about_translator": "In environments where information tends to be dense, my job is to act as a <1>\"translator\"</1>, turning data, rules, and documents into something clear, visual, and useful, that is quickly understood and reaches those it needs to reach.",
-        "about_autodidact": "Many of the skills I use today I have learned <1>autodidactically</1>. I usually explore any new tool on my own, understand its logic, and adapt it quickly to what I need. I learn by testing, understanding the system, and applying it to real projects.",
-        "story_title": "I started getting into things I didn't know... and figuring out how to make them work",
-        "story_desc": "I made designs, invented databases, and told stories without knowing why. Years later I understood that I was already building my way of thinking.",
+        "projects_title": "Projects",
+        "about_title": "About",
+        "about_intro": "I hold a degree in <1>Political Science and Public Administration</1> and I work by turning complex information into clear pieces. I’m comfortable with <1>operational work, documentation, case files, regulations, writing and task organization</1>, as well as <1>analysis, statistics, data and visualization</1>.",
+        "about_translator": "I turn all of that into publishable deliverables, from <1>reports, maps and dashboards to web products</1>. And when the channel is <1>social media</1>, I translate it into content with a sense of format, pacing and distribution, so the message is understood and travels.",
+        "about_autodidact": "Many of the skills I use today are <1>self-taught</1>. I usually explore new tools on my own, understand their logic and adapt them quickly to what I need. I learn by testing, understanding the system and applying it to real projects.",
+        "story_title": "I started jumping into things I didn’t know… and figuring out how to make them work",
+        "story_desc": "I made designs, invented databases and told stories without really knowing why. Years later, I realized I was already building the way I think.",
         "story_cta": "A bit of my story",
-        "tools_title": "Core Tools",
+        "tools_title": "Everyday tools",
         "tools_subtitle": "I adapt quickly to new tools depending on the team and workflow.",
         "experience_title": "Experience",
-        "contact_title": "Let's talk?",
-        "contact_lead": "I'm available ;)",
+        "contact_title": "Shall we talk?",
+        "contact_lead": "I’m available ;)",
         "send_email": "Send email",
-        "tools_design_title": "Design & Video",
-        "tools_design_desc": "Creating high-impact visual content and managing viral formats.",
-        "tools_data_title": "Data & Analysis",
-        "tools_data_desc": "Ability to transform raw data into clear insights for decision-making.",
-        "tools_management_title": "Management & Communication",
-        "tools_management_desc": "Administrative profile fluent in organizational tools and technical writing."
+        "tools_design_title": "Design and video",
+        "tools_design_desc": "High-impact visual content creation and short-form/viral format management.",
+        "tools_data_title": "Data and analysis",
+        "tools_data_desc": "Ability to turn raw data into clear insights for decision-making.",
+        "tools_management_title": "Operations and communication",
+        "tools_management_desc": "Administrative profile with strong organization tools and technical writing."
     },
     "projects": {
         "dentro_del_pleno": {
-            "desc": "Interactive and visual piece, designed as a scrollytelling exercise, summarizing the year 2025 in the plenary sessions of the Congress of Deputies.",
-            "link": "See Dentro del Pleno"
+            "desc": "An interactive, visual piece conceived as a scrollytelling exercise, summarizing 2025 in the plenary sessions of Spain’s Congress of Deputies.",
+            "link": "View Dentro del Pleno"
         },
         "aforolab": {
-            "desc": "LaLiga stadium attendance analytics platform, with interactive visualizations allowing comparison of different metrics between clubs in Spanish professional football competitions.",
+            "desc": "A LaLiga stadium attendance analytics platform with interactive visualizations to compare key metrics across clubs in Spain’s professional football competitions.",
             "link": "Visit AforoLab"
         },
         "kike_perez": {
-            "desc": "Design of the basic tour poster and adaptations for different functions and venues, maintaining a common visual identity."
+            "desc": "Key poster design for the tour and adaptations for different shows and venues, keeping a consistent visual identity."
         },
         "wordle_canario": {
-            "desc": "Canarian version of the original game: a light and daily project that turned Canarian vocabulary into a shared habit. Guess the word in six attempts.",
+            "desc": "A Canary Islands version of the original game, a light everyday project that turned local vocabulary into a shared habit. Guess the word in six tries.",
             "link": "Play Wordle Canario"
         },
         "pasion_colchonera": {
-            "desc": "Pasión Colchonera was a branding job for a sports project on social media, where I developed key identity pieces and visual presence: designs for Instagram, Twitter banner, profile picture, and resources for highlights."
+            "desc": "Pasión Colchonera was a branding project for a sports social account, where I developed key identity and visual presence assets, Instagram designs, Twitter banner, profile image and highlights resources."
         },
         "fondo_segunda": {
-            "desc": "Co-foundation of the Fondo Segunda website, a reference medium for the Second Division of Spanish football. Professional editorial design combining design, statistics, and opinion articles. I laid out and worked on the design of the 2019/20 Season Guide.",
+            "desc": "Co-founded Fondo Segunda, a leading outlet for Spain’s Segunda División. Professional editorial design combining design, statistics and opinion pieces. I laid out and worked on the 2019/20 season guide design.",
             "link": "Visit Fondo Segunda"
         }
     },
     "timeline": {
         "csif": {
             "period": "Since September 2025",
-            "role": "Institutional and Trade Union Communication",
-            "place": "Central Independent Union of Civil Servants (CSIF) · Las Palmas Provincial Union",
-            "desc": "Support in external and internal communication tasks for the Provincial Union, creating and adapting information pieces and video content. Drafting and editing press releases, and adjusting messages to different formats."
+            "role": "Institutional and union communications",
+            "place": "Central Sindical Independiente de Funcionarios (CSIF) · Unión Provincial de Las Palmas",
+            "desc": "Support for internal and external communications at the provincial branch, producing and adapting informational pieces and video content. Writing and editing press releases and tailoring messages to different formats."
         },
         "practices": {
             "period": "January 2025 - May 2025",
-            "role": "Technical-Institutional Work",
+            "role": "Technical–institutional work",
             "place": "Internship · Development and Communication",
-            "desc": "Integral support in communication and technical management tasks: drafting and layout of documents, press releases, and social media administration. Execution of the entire data analysis cycle for reports and surveys (collection, cleaning, and visualization) and synthesis of regulations and calls into clear criteria. Active collaboration in internal coordination and with other entities."
+            "desc": "End-to-end support in communications and technical operations, drafting and layout of documents, press releases and social media management. Full data analysis cycle for reports and surveys (collection, cleaning and visualization) and translating regulations and calls into clear criteria. Active collaboration in internal coordination and with other entities."
         },
         "degree": {
             "period": "2020 - 2024",
-            "role": "Degree in Political Science and Administration",
-            "place": "University of Santiago de Compostela",
-            "desc": "Training with a strong methodological and analytical load. Specialization in applied statistics and social research techniques (quantitative and qualitative), combined with deep study of public management, political strategy, and communication. Decision analysis, electoral behavior, and public policy evaluation."
+            "role": "B.A. in Political Science and Public Administration",
+            "place": "Universidade de Santiago de Compostela",
+            "desc": "Methodologically and analytically intensive training. Focus on applied statistics and social research methods (quantitative and qualitative), combined with in-depth study of public management, political strategy and communication. Decision analysis, electoral behavior and public policy evaluation."
         }
     }
 }

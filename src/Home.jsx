@@ -261,7 +261,7 @@ function Home() {
                                 exit={{ opacity: 0 }}
                                 transition={{ duration: 0.4, ease: "easeInOut" }}
                             >
-                                {(hoveredFilter || filter) === 'all' && 'Proyectos, piezas y experimentos'}
+                                {(hoveredFilter || filter) === 'all' && t('axes.allprojects_desc')}
                                 {(hoveredFilter || filter) === 'datos' && t('axes.data_desc')}
                                 {(hoveredFilter || filter) === 'producto' && t('axes.product_desc')}
                                 {(hoveredFilter || filter) === 'creativo' && t('axes.creative_desc')}
@@ -272,7 +272,7 @@ function Home() {
                         <div className="filter-icons-container">
                             <FilterIcon
                                 icon={<AnimatedAllIcon isHovered={hoveredFilter === 'all'} />}
-                                label="Todos"
+                                label={t('axes.all_title')}
                                 isActive={filter === 'all'}
                                 onClick={() => setFilter('all')}
                                 onHover={() => setHoveredFilter('all')}

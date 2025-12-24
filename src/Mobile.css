@@ -19,10 +19,16 @@
         width: 100%;
         text-align: center;
         padding-bottom: 0.1em;
+        margin-top: 2rem !important;
+        /* Push title down */
     }
 
     .hero-lead {
-        font-size: 1.1rem !important;
+        font-size: 0.95rem !important;
+        margin-top: 1.5rem !important;
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .section-title {
@@ -32,17 +38,38 @@
 
     /* --- HERO SECTION --- */
     .hero {
-        padding-top: 5rem;
-        /* Navbar overlap */
-        min-height: auto;
-        padding-bottom: 2rem;
-        /* Reduced from 4rem */
+        padding-top: 8rem;
+        min-height: 100vh !important;
+        /* Ensure it fills screen */
+        padding-bottom: 4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     .hero-content {
         flex-direction: column-reverse;
+        /* Ensure text is below if image exists, or adjust order */
         gap: 1.5rem;
-        /* Reduced from 2rem */
+    }
+
+    .hero-actions {
+        margin-top: 3rem !important;
+        /* Lower the buttons */
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        align-items: center;
+    }
+
+    .scroll-indicator {
+        position: absolute;
+        bottom: 1.5rem !important;
+        /* Pin to bottom */
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 0 !important;
     }
 
     .section-title {

@@ -4,7 +4,7 @@
         "about": "Sobre min",
         "story": "A miña historia",
         "tools": "Ferramentas",
-        "experience": "Traxectoría",
+        "experience": "Traxectoria",
         "contact": "Contacto"
     },
     "navigation": {
@@ -15,34 +15,36 @@
         "role": "Técnico de datos e comunicación",
         "sub_role": "Data storytelling e contido creativo",
         "lead": "Deseño, datos e estratexia para comunicar con sentido.",
-        "cta_projects": "Ver Proxectos",
-        "cta_talk": "Falemos",
+        "cta_projects": "Ver proxectos",
+        "cta_talk": "Falamos",
         "greeting": "Ola, son",
         "name": "Diego Tejera :)"
     },
     "axes": {
+        "all_title": "TODOS",
+        "allprojects_desc": "Proxectos, pezas e experimentos",
         "data_title": "DATOS",
         "data_desc": "Traballo datos para convertelos en entregables claros e sólidos. Limpeza, consistencia e visualización para que o publicado sexa comprensible e defendible.",
         "data_cta": "Ver o método",
         "product_title": "PRODUTO",
         "product_desc": "Construo produtos dixitais que guían e enganchan. Xerarquía, ritmo e microdetalles para facilitar a exploración e crear experiencias escalables.",
         "product_cta": "Ver o enfoque",
-        "creative_title": "CONTIDO CREATIVO",
-        "creative_desc": "Contido con identidade e enfoque en resultados. Estrutura, estética e ritmo para soster a atención. O formato cambia, o criterio permanece.",
+        "creative_title": "CONTIDO\nCREATIVO",
+        "creative_desc": "Contido con identidade e foco en resultados. Estrutura, estética e ritmo para soster a atención. O formato cambia, o criterio permanece.",
         "creative_cta": "Ver a montaxe"
     },
     "sections": {
         "projects_title": "Os meus proxectos",
-        "about_title": "Máis alá do título",
-        "about_intro": "Son graduado en <1>Ciencia Política e da Administración</1>, e a miña paixón está na intersección entre o <3>dixital</3> e o <5>institucional</5>. Móvome cómodo entre documentos técnicos, follas de cálculo, normativa, expedientes e liñas de tempo de vídeo.",
-        "about_translator": "En contornas onde a información adoita ser densa, o meu traballo é actuar como <1>\"tradutor\"</1>, convertendo datos, normas e documentos en algo claro, visual e útil, que se entenda rápido e chegue a quen ten que chegar.",
-        "about_autodidact": "Moitas das habilidades que uso hoxe aprendinas de forma <1>autodidacta</1>. Adoito explorar pola miña conta calquera ferramenta nova, entender a súa lóxica e adaptala rapidamente ao que necesito. Aprendo probando, entendendo o sistema e aplicándoo a proxectos reais.",
-        "story_title": "Empecei meténdome onde non sabía... e atopando como facelo funcionar",
-        "story_desc": "Facía deseños, inventaba bases de datos e contaba historias sen saber por que. Años despois entendín que xa estaba a construír a miña forma de pensar.",
+        "about_title": "Sobre min",
+        "about_intro": "Son graduado en <1>Ciencia Política e da Administración</1> e traballo convertendo información complexa en pezas claras. Móvome cómodo en <1>a parte operativa, documentación, expedientes, normativa, redacción e organización de tarefas</1>, e tamén en <1>a parte analítica, estatística, datos e visualización</1>.",
+        "about_translator": "Todo isto transfórmoo en entregables publicables, desde <1>informes, mapas e dashboards ata produto web</1>. E cando a canle son as <1>redes sociais</1>, lévoo a contido con criterio de formato, ritmo e distribución, para que a mensaxe se entenda e circule.",
+        "about_autodidact": "Moitas das habilidades que uso hoxe aprendinas de forma <1>autodidacta</1>. Adoito explorar pola miña conta calquera ferramenta nova, entender a súa lóxica e adaptala rapidamente ao que preciso. Aprendo probando, entendendo o sistema e aplicándoo a proxectos reais.",
+        "story_title": "Comecei meténdome onde non sabía... e atopando como facelo funcionar",
+        "story_desc": "Facía deseños, inventaba bases de datos e contaba historias sen saber por que. Anos despois entendín que xa estaba construíndo a miña forma de pensar.",
         "story_cta": "Un pouco da miña historia",
         "tools_title": "Ferramentas habituais",
         "tools_subtitle": "Adáptome rápido a novas ferramentas segundo o equipo e o fluxo de traballo.",
-        "experience_title": "Traxectoría",
+        "experience_title": "Traxectoria",
         "contact_title": "Falamos?",
         "contact_lead": "Estou dispoñible ;)",
         "send_email": "Enviar correo",
@@ -66,14 +68,14 @@
             "desc": "Deseño do cartel base da xira e adaptacións para distintas funcións e recintos, mantendo unha identidade visual común."
         },
         "wordle_canario": {
-            "desc": "Versión canaria do xogo orixinal: un proxecto lixeiro e cotián que converteu o léxico canario nun hábito compartido. Adiviña a palabra en seis intentos.",
+            "desc": "Versión canaria do xogo orixinal, un proxecto lixeiro e cotián que converteu o léxico canario nun hábito compartido. Adiviña a palabra en seis intentos.",
             "link": "Xogar ao Wordle Canario"
         },
         "pasion_colchonera": {
-            "desc": "Pasión Colchonera foi un traballo de branding para un proxecto deportivo en redes, onde desenvolví pezas clave de identidade e presenza visual: deseños para Instagram, banner de Twitter, foto de perfil e recursos para historias destacadas."
+            "desc": "Pasión Colchonera foi un traballo de branding para un proxecto deportivo en redes, no que desenvolvín pezas clave de identidade e presenza visual, deseños para Instagram, banner de Twitter, foto de perfil e recursos para historias destacadas."
         },
         "fondo_segunda": {
-            "desc": "Co-fundación da web Fondo Segunda, medio referencia da Segunda División do fútbol español. Deseño editorial profesional combinando deseño, estatísticas e artigos de opinión. Maquetei e traballei no deseño da Guía da tempada 2019/20.",
+            "desc": "Co-fundación da web Fondo Segunda, medio de referencia da Segunda División do fútbol español. Deseño editorial profesional combinando deseño, estatísticas e artigos de opinión. Maquetei e traballei no deseño da Guía da tempada 2019/20.",
             "link": "Visitar Fondo Segunda"
         }
     },
@@ -82,13 +84,13 @@
             "period": "Desde setembro de 2025",
             "role": "Comunicación institucional e sindical",
             "place": "Central Sindical Independiente de Funcionarios (CSIF) · Unión Provincial de Las Palmas",
-            "desc": "Apoio en tarefas de comunicación externa e interna para a Unión Provincial, con elaboración e adaptación de pezas informativas e contidos de vídeo. Redacción e edición de notas de prensa, e axuste de mensaxes a distintos formatos."
+            "desc": "Apoio en tarefas de comunicación externa e interna para a Unión Provincial, con elaboración e adaptación de pezas informativas e contidos de vídeo. Redacción e edición de notas de prensa e axuste de mensaxes a distintos formatos."
         },
         "practices": {
             "period": "Xaneiro 2025 - Maio 2025",
             "role": "Traballo técnico-institucional",
             "place": "Prácticas · Desenvolvemento e Comunicación",
-            "desc": "Soporte integral en tarefas de comunicación e xestión técnica: redacción e maquetación de documentos, notas de prensa e administración de redes sociais. Realización de todo o ciclo de análise de datos para informes e enquisas (recollida, depuración e visualización) e sintetización de normativas e convocatorias en criterios claros. Colaboración activa na coordinación interna e con outras entidades."
+            "desc": "Soporte integral en tarefas de comunicación e xestión técnica, redacción e maquetación de documentos, notas de prensa e administración de redes sociais. Realización de todo o ciclo de análise de datos para informes e enquisas (recollida, depuración e visualización) e síntese de normativas e convocatorias en criterios claros. Colaboración activa na coordinación interna e con outras entidades."
         },
         "degree": {
             "period": "2020 - 2024",
