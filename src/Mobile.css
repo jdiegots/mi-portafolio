@@ -1,0 +1,198 @@
+/* MOBILE OPTIMIZATIONS */
+@media (max-width: 768px) {
+
+    /* --- GLOBAL & TYPOGRAPHY --- */
+    html,
+    body {
+        overflow-x: hidden;
+    }
+
+    .container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    h1.hero-title {
+        font-size: 3rem !important;
+        /* Reduce large hero title */
+    }
+
+    .hero-lead {
+        font-size: 1.1rem !important;
+    }
+
+    .section-title {
+        font-size: 2rem !important;
+        margin-bottom: 2rem !important;
+    }
+
+    /* --- HERO SECTION --- */
+    .hero {
+        padding-top: 6rem;
+        /* Navbar overlap */
+        min-height: auto;
+        /* Remove rigid full height */
+        padding-bottom: 4rem;
+    }
+
+    .hero-content {
+        flex-direction: column-reverse;
+        /* Text on top? Or Image on top? Usually Image on top or Middle. Let's keep default stack but adjust gaps */
+        gap: 2rem;
+    }
+
+    .hero-image-container {
+        width: 100%;
+        max-width: 300px;
+        /* Limit image size on mobile */
+        margin: 0 auto;
+    }
+
+    /* --- PROJECTS / AXES --- */
+    .core-header-wide {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1.5rem;
+    }
+
+    .header-content-left {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .header-text h3 {
+        font-size: 1.5rem;
+    }
+
+    .project-card {
+        min-width: 85vw !important;
+        width: 85vw !important;
+        margin-right: 1rem;
+        /* Spacing in scroll */
+        flex-direction: column !important;
+        /* Stack image/content on mobile for better visibility */
+        height: auto;
+    }
+
+    /* OVERRIDE HorizontalCards.css mobile specific row layout if it exists to be cleaner stack */
+    .node-projects-list .project-card {
+        flex-direction: column !important;
+        min-width: 80vw;
+        width: 80vw;
+    }
+
+    .node-projects-list .project-image-container {
+        width: 100% !important;
+        /* Full width image */
+        height: 180px !important;
+        /* Fixed manageable height */
+        border-radius: 12px 12px 0 0 !important;
+        /* Top corners only */
+    }
+
+    .node-projects-list .project-content {
+        padding: 1.5rem !important;
+    }
+
+    /* --- SPLIT SECTION (Tools & Experience) --- */
+    /* Ensure strict stacking */
+    .split-content-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        margin-top: 2rem;
+    }
+
+    .split-col-left {
+        padding-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 3rem;
+    }
+
+    .split-col-right {
+        padding-left: 0;
+    }
+
+    /* Ensure tool badges grid well */
+    .tool-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .timeline {
+        padding-left: 1rem;
+        /* Tighter timeline */
+    }
+
+    /* --- ABOUT & STORY --- */
+    .about-text,
+    .about-stats {
+        width: 100%;
+    }
+
+    .stat-item {
+        flex: 1 1 100%;
+        /* Stack stats full width */
+        margin-bottom: 1rem;
+    }
+
+    .story-banner {
+        flex-direction: column;
+    }
+
+    .story-image {
+        display: none;
+        /* Hide heavy image on mobile or make it smaller? Let's hide to save space or move to bottom */
+    }
+
+    /* --- NAVBAR --- */
+    .navbar .container {
+        padding: 0 1.5rem;
+    }
+
+    /* --- MODAL --- */
+    .lightbox-content.project-detail-modal {
+        width: 95% !important;
+        max-height: 85vh;
+        overflow-y: auto;
+        border-radius: 12px !important;
+    }
+
+    .modal-image-wrapper {
+        max-height: 250px !important;
+        /* Smaller image area */
+    }
+
+    .modal-text-content {
+        padding: 1.5rem !important;
+    }
+
+    .modal-text-content h3 {
+        font-size: 1.5rem !important;
+    }
+
+    .lightbox-close {
+        top: 0.5rem !important;
+        right: 0.5rem !important;
+        width: 40px !important;
+        /* Larger touch target */
+        height: 40px !important;
+    }
+
+    /* --- Language Bar --- */
+    .lang-switcher button {
+        padding: 0.5rem 0.75rem !important;
+        /* Larger touch targets */
+        font-size: 0.9rem !important;
+    }
+
+    /* --- Contact Buttons --- */
+    .contact-section .btn-large {
+        width: 100%;
+        /* Full width buttons on mobile */
+        justify-content: center;
+        margin-bottom: 0.5rem;
+    }
+}

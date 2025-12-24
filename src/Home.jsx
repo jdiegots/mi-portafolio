@@ -30,6 +30,7 @@ import "./App.css";
 import "./CoreAxes.css";
 import "./HorizontalCards.css";
 import "./SplitSection.css";
+import "./Mobile.css"; // Mobile Optimizations
 
 // Animation variants
 const fadeInUp = {
