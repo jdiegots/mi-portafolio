@@ -145,3 +145,55 @@ export const AnimatedCreativeIcon = ({ isHovered }) => {
         </svg>
     );
 };
+
+export const AnimatedAllIcon = ({ isHovered }) => {
+    // Grid of squares that pulse/scale on hover
+    const squares = [
+        { x: 3, y: 3 },
+        { x: 10, y: 3 },
+        { x: 17, y: 3 },
+        { x: 3, y: 10 },
+        { x: 10, y: 10 },
+        { x: 17, y: 10 },
+        { x: 3, y: 17 },
+        { x: 10, y: 17 },
+        { x: 17, y: 17 }
+    ];
+
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="36"
+            height="36"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{ overflow: 'visible' }}
+        >
+            {squares.map((sq, i) => (
+                <motion.rect
+                    key={i}
+                    x={sq.x}
+                    y={sq.y}
+                    width="5"
+                    height="5"
+                    rx="1"
+                    initial={{ scale: 1, opacity: 1 }}
+                    animate={isHovered ? {
+                        scale: [1, 1.1, 1],
+                        opacity: [1, 0.7, 1]
+                    } : { scale: 1, opacity: 1 }}
+                    transition={{
+                        duration: 0.6,
+                        delay: i * 0.05,
+                        ease: "easeInOut"
+                    }}
+                    style={{ transformBox: 'fill-box', transformOrigin: 'center' }}
+                />
+            ))}
+        </svg>
+    );
+};

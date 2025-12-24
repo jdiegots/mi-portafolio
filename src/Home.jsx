@@ -1,158 +1,124 @@
-import React, { useState, useEffect, useRef } from "react";
-import ScrollableProjectList from "./ScrollableProjectList";
+import React, { useState, useEffect } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { motion } from "framer-motion";
 import {
-    Linkedin,
-    Mail,
-    Instagram,
-    ExternalLink,
     ChevronDown,
     BarChart3,
-    PenTool,
-    MessageSquare,
-    Briefcase,
     Code2,
-    Globe,
-    Brain,
     Palette,
-    Zap,
     ArrowRight,
-    ArrowLeft,
     X,
-    Maximize2,
-    Layers,
-    Wand2
+    ExternalLink,
+    Briefcase,
+    Building2,
+    GraduationCap
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { AnimatedDataIcon, AnimatedProductIcon, AnimatedCreativeIcon } from "./AnimatedIcons";
+import { AnimatedDataIcon, AnimatedProductIcon, AnimatedCreativeIcon, AnimatedAllIcon } from "./AnimatedIcons";
 import "./App.css";
 import "./CoreAxes.css";
-import "./HorizontalCards.css";
 import "./SplitSection.css";
-import "./Mobile.css"; // Mobile Optimizations
+import "./Mobile.css";
+import "./ProjectsHex.css";
+import GaussianCurveBackground from './GaussianCurveBackground';
 
-// Animation variants
-const fadeInUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-};
-
-const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: {
-            staggerChildren: 0.1
-        }
+// Project Data (Ecosystem)
+const PROJECTS_DATA = [
+    {
+        id: 'dentro-pleno',
+        area: 'datos',
+        title: "Dentro del Pleno",
+        year: "2025",
+        tagShort: "Scrollytelling",
+        image: "/images/dentro-del-pleno.png",
+        url: "https://dentrodelpleno.pages.dev",
+        highlights: [
+            "Resumen interactivo de 2025.",
+            "Visualización de votaciones complejas.",
+            "Narrativa basada en datos puros."
+        ]
+    },
+    {
+        id: 'aforolab',
+        area: 'datos',
+        title: "AforoLab",
+        year: "2025",
+        tagShort: "Analytics",
+        image: "/images/aforolab.png",
+        url: "https://aforolab.pages.dev",
+        highlights: [
+            "Métricas de asistencia a estadios.",
+            "Comparativa interactiva entre clubes.",
+            "Insights sobre ocupación y ticketing."
+        ]
+    },
+    {
+        id: 'wordle',
+        area: 'producto',
+        title: "Wordle Canario",
+        year: "2022",
+        tagShort: "Web App",
+        image: "/images/wordle-canario-web.png",
+        url: "https://wordlecanario.com",
+        highlights: [
+            "Éxito viral en redes sociales.",
+            "Diseño ligero y adictivo.",
+            "Adaptación cultural del original."
+        ]
+    },
+    {
+        id: 'fondo-segunda',
+        area: 'producto',
+        title: "Fondo Segunda",
+        year: "2019",
+        tagShort: "Editorial",
+        image: "/images/pasion-colchonera.webp", // Fallback if no specific img
+        url: "https://fondosegunda.com",
+        highlights: [
+            "Cofundador de medio referencia.",
+            "Maquetación de guías digitales.",
+            "Gestión de producto informativo."
+        ]
+    },
+    {
+        id: 'kike-perez',
+        area: 'creativo',
+        title: "Kike Pérez",
+        year: "2023",
+        tagShort: "Branding",
+        image: "/images/kikeperez.jpg",
+        highlights: [
+            "Diseño de cartelería nacional.",
+            "Adaptación visual para recintos.",
+            "Identidad coherente para gira."
+        ]
+    },
+    {
+        id: 'pasion-colchonera',
+        area: 'creativo',
+        title: "Pasión Colchonera",
+        year: "2021",
+        tagShort: "Social Media",
+        image: "/images/pasion-colchonera-banner.jpg",
+        highlights: [
+            "Identidad visual deportiva.",
+            "Creación de recursos para redes.",
+            "Branding enfocado a engagement."
+        ]
     }
-};
+];
 
 function Home() {
     const [scrolled, setScrolled] = useState(false);
-    const [selectedImage, setSelectedImage] = useState(null);
-    const [activeIcon, setActiveIcon] = useState(null);
+    const [selectedProject, setSelectedProject] = useState(null);
+    const [filter, setFilter] = useState('all'); // 'all', 'datos', 'producto', 'creativo'
+    const [hoveredFilter, setHoveredFilter] = useState(null);
     const location = useLocation();
     const { t, i18n } = useTranslation();
 
     const changeLanguage = (lng) => {
         i18n.changeLanguage(lng);
     };
-
-    // Scroll / Drag Logic
-    const scrollRef = useRef(null);
-    const [isDown, setIsDown] = useState(false);
-    const [startX, setStartX] = useState(0);
-    const [scrollLeft, setScrollLeft] = useState(0);
-    const scrollPosRef = useRef(0); // Track float position
-
-    // Auto-scroll effect
-    useEffect(() => {
-        const scrollContainer = scrollRef.current;
-        if (!scrollContainer) return;
-
-        // Sync ref with current scroll on mount/updates
-        scrollPosRef.current = scrollContainer.scrollLeft;
-
-        let animationFrameId;
-
-        const loop = () => {
-            // Check if mobile
-            const isMobile = window.innerWidth <= 768;
-
-            // If user is not dragging AND NOT mobile, scroll automatically
-            if (!isDown && !isMobile) {
-                scrollPosRef.current += 0.3; // Slightly faster to avoid sub-pixel quantization stutter
-                scrollContainer.scrollLeft = scrollPosRef.current;
-
-                // Infinite loop check
-                if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
-                    scrollContainer.scrollLeft = 0;
-                    scrollPosRef.current = 0;
-                }
-            } else {
-                // Update ref if user drags manually so it doesn't jump back
-                scrollPosRef.current = scrollContainer.scrollLeft;
-            }
-            animationFrameId = requestAnimationFrame(loop);
-        };
-
-        animationFrameId = requestAnimationFrame(loop);
-
-        return () => cancelAnimationFrame(animationFrameId);
-    }, [isDown]);
-
-    // Desktop Drag Handlers
-    const handleMouseDown = (e) => {
-        setIsDown(true);
-        setStartX(e.pageX - scrollRef.current.offsetLeft);
-        setScrollLeft(scrollRef.current.scrollLeft);
-    };
-
-    const handleMouseLeave = () => {
-        setIsDown(false);
-    };
-
-    const handleMouseUp = () => {
-        setIsDown(false);
-    };
-
-    const handleMouseMove = (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - scrollRef.current.offsetLeft;
-        const walk = (x - startX) * 2; // Scroll-fast multiplier
-        scrollRef.current.scrollLeft = scrollLeft - walk;
-    };
-
-    // Touch Handlers
-    const handleTouchStart = (e) => {
-        setIsDown(true);
-        setStartX(e.touches[0].pageX - scrollRef.current.offsetLeft);
-        setScrollLeft(scrollRef.current.scrollLeft);
-    };
-
-    const handleTouchMove = (e) => {
-        if (!isDown) return;
-        const x = e.touches[0].pageX - scrollRef.current.offsetLeft;
-        const walk = (x - startX) * 2;
-        scrollRef.current.scrollLeft = scrollLeft - walk;
-    };
-
-    const handleTouchEnd = () => {
-        setIsDown(false);
-    };
-
-    useEffect(() => {
-        if (location.hash) {
-            const element = document.getElementById(location.hash.replace('#', ''));
-            if (element) {
-                setTimeout(() => {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                }, 100);
-            }
-        }
-    }, [location]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -162,46 +128,73 @@ function Home() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    useEffect(() => {
+        if (location.hash) {
+            const element = document.getElementById(location.hash.replace('#', ''));
+            if (element) {
+                setTimeout(() => element.scrollIntoView({ behavior: 'smooth' }), 100);
+            }
+        }
+    }, [location]);
+
+    const handleProjectClick = (project) => {
+        if (selectedProject?.id === project.id) {
+            setSelectedProject(null);
+        } else {
+            setSelectedProject(project);
+        }
+    };
+
+    // Calculate number of columns based on window width
+    const getColumns = () => {
+        if (typeof window === 'undefined') return 4;
+        const width = window.innerWidth;
+        if (width >= 1200) return 4;
+        if (width >= 768) return 3;
+        if (width >= 480) return 2;
+        return 1;
+    };
+
+    // Filter projects
+    const filteredProjects = filter === 'all'
+        ? PROJECTS_DATA
+        : PROJECTS_DATA.filter(p => p.area === filter);
+
+    // Mouse tracking for gradient animation
+    useEffect(() => {
+        const handleMouseMove = (e) => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            document.documentElement.style.setProperty('--mouse-x', `${x}%`);
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, []);
+
     return (
         <div className="app-container">
             <div className="global-background">
-                <div className="blob blob-1"></div>
-                <div className="blob blob-2"></div>
-                <div className="blob blob-3"></div>
-                <div className="blob blob-4"></div>
+                {[1, 2, 3, 4, 5, 6].map(n => <div key={n} className={`blob blob-${n}`}></div>)}
             </div>
 
             {/* Top Language Bar */}
             <div className={`lang-top-bar ${scrolled ? 'hidden' : ''}`}>
                 <div className="lang-switcher">
-                    <button
-                        onClick={() => changeLanguage('es')}
-                        className={i18n.language === 'es' || i18n.language?.startsWith('es') ? 'active' : ''}
-                        title="Español"
-                    >
-                        <img src="/flags/es.png" alt="Español" className="lang-flag" /> ES
-                    </button>
-                    <span className="lang-separator">|</span>
-                    <button
-                        onClick={() => changeLanguage('gl')}
-                        className={i18n.language === 'gl' || i18n.language?.startsWith('gl') ? 'active' : ''}
-                        title="Galego"
-                    >
-                        <img src="/flags/gl.png" alt="Galego" className="lang-flag" /> GL
-                    </button>
-                    <span className="lang-separator">|</span>
-                    <button
-                        onClick={() => changeLanguage('en')}
-                        className={i18n.language === 'en' || i18n.language?.startsWith('en') ? 'active' : ''}
-                        title="English"
-                    >
-                        <img src="/flags/en.png" alt="English" className="lang-flag" /> EN
-                    </button>
+                    {['es', 'gl', 'en'].map(lng => (
+                        <React.Fragment key={lng}>
+                            <button
+                                onClick={() => changeLanguage(lng)}
+                                className={i18n.language === lng || i18n.language?.startsWith(lng) ? 'active' : ''}
+                            >
+                                <img src={`/flags/${lng}.png`} alt={lng} className="lang-flag" /> {lng.toUpperCase()}
+                            </button>
+                            {lng !== 'en' && <span className="lang-separator">|</span>}
+                        </React.Fragment>
+                    ))}
                 </div>
             </div>
 
-            {/* Navigation */}
-            <nav className={`navbar ${scrolled ? "scrolled" : ""} `}>
+            <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
                 <div className="container nav-content">
                     <div className="logo">DT.</div>
                     <div className="nav-links">
@@ -210,711 +203,419 @@ function Home() {
                 </div>
             </nav>
 
-            {/* Hero Section */}
             <section className="hero">
-                <div className="container hero-content">
-                    <motion.div
-                        className="hero-text"
-                        initial="hidden"
-                        animate="visible"
-                        variants={staggerContainer}
-                    >
-                        <motion.p variants={fadeInUp} className="hero-kicker">
+                <GaussianCurveBackground />
+                <div className="container hero-content" style={{ justifyContent: 'center' }}>
+                    <motion.div className="hero-text" initial="hidden" animate="visible" variants={staggerContainer} style={{ maxWidth: '800px', margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <motion.p variants={fadeInUp} className="hero-kicker" style={{ alignSelf: 'flex-start', textAlign: 'left' }}>
                             {t('hero.role')}<br />
                             <span style={{ display: 'block', marginTop: '4px' }}>{t('hero.sub_role')}</span>
                         </motion.p>
-                        <motion.h1
-                            key={i18n.language}
-                            className="hero-title"
-                            initial="hidden"
-                            animate="visible"
-                            variants={{
-                                hidden: { opacity: 0 },
-                                visible: {
-                                    opacity: 1,
-                                    transition: {
-                                        staggerChildren: 0.05,
-                                        delayChildren: 0.2
-                                    }
-                                }
-                            }}
-                        >
-                            {/* "Hola, soy" */}
-                            {Array.from(t('hero.greeting')).map((char, i) => (
-                                <motion.span
-                                    key={`text-${i}-${i18n.language}`}
-                                    variants={{
-                                        hidden: { y: 20, opacity: 0 },
-                                        visible: {
-                                            y: 0,
-                                            opacity: 1,
-                                            transition: { duration: 0.4 }
-                                        }
-                                    }}
-                                    style={{ display: "inline-block", marginRight: char === " " ? "0.25em" : "0" }}
-                                >
-                                    {char === " " ? "\u00A0" : char}
-                                </motion.span>
-                            ))}
-
-                            <span style={{ display: "inline-block", width: "0.25em" }}></span>
-
-                            {/* Name - Simplified Gradient Scale */}
-                            <motion.span
-                                className="name-gradient-simple"
-                                variants={{
-                                    hidden: { opacity: 0, y: 20 },
-                                    visible: {
-                                        opacity: 1,
-                                        y: 0,
-                                        transition: { duration: 0.5 }
-                                    }
-                                }}
-                                whileHover={{ scale: 1.05 }}
-                                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                            >
-                                {t('hero.name')}
-                            </motion.span>
+                        <motion.h1 className="hero-title" variants={fadeInUp}>
+                            {t('hero.greeting')} <span className="name-gradient-simple">{t('hero.name')}</span>
                         </motion.h1>
-                        <motion.p variants={fadeInUp} className="hero-lead">
-                            {t('hero.lead')}
-                        </motion.p>
-
-                        <motion.div variants={fadeInUp} className="hero-actions">
+                        <motion.p variants={fadeInUp} className="hero-lead">{t('hero.lead')}</motion.p>
+                        <motion.div variants={fadeInUp} className="hero-actions" style={{ justifyContent: 'center' }}>
                             <a href="#proyectos" className="btn btn-primary">{t('hero.cta_projects')}</a>
                             <a href="#contacto" className="btn btn-outline">{t('hero.cta_talk')}</a>
                         </motion.div>
-
-                        <motion.div variants={fadeInUp} className="hero-socials">
-                            <SocialLink href="https://www.linkedin.com/in/juandiegotejerasosa/" icon={<LinkedInIcon size={20} />} label="LinkedIn" />
+                        <motion.div variants={fadeInUp} className="hero-socials" style={{ justifyContent: 'center' }}>
+                            <SocialLink href="https://linkedin.com/in/juandiegotejerasosa/" icon={<LinkedInIcon size={20} />} label="LinkedIn" />
                             <SocialLink href="mailto:jdiegotejeras@gmail.com" icon={<MailFilledIcon size={20} />} label="Email" />
                         </motion.div>
                     </motion.div>
-
-                    <motion.div
-                        className="hero-image-container"
-                        initial={{ opacity: 0, x: 50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8, delay: 0.5 }}
-                    >
-                        <div className="hero-img-wrapper">
-                            <img src="/images/foto-perfil.png" alt="Diego Tejera" />
-                        </div>
-                    </motion.div>
                 </div>
-
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1, duration: 1 }}
-                    className="scroll-indicator"
-                >
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }} className="scroll-indicator">
                     <ChevronDown size={24} />
                 </motion.div>
             </section>
 
             <main>
-                {/* Axes Section */}
-                {/* Core Axes Section (Rows) */}
-                {/* Axes Section */}
-                <section className="core-axes-section" id="proyectos">
-                    <div className="container" style={{ maxWidth: '1400px', marginBottom: '4rem' }}>
-                        <h2 className="section-title">{t('sections.projects_title')}</h2>
-                    </div>
-
-                    <div className="core-axes-container">
-
-                        {/* ROW 1: DATOS */}
-                        <div className="core-axis-row">
-                            {/* Wide Header */}
-                            <div
-                                className="core-header-wide"
-                                onMouseEnter={() => setActiveIcon('data')}
-                                onMouseLeave={() => setActiveIcon(null)}
-                                onClick={() => setActiveIcon('data')}
-                            >
-                                <div className="header-content-left">
-                                    <div className="header-icon-wrapper">
-                                        <AnimatedDataIcon isHovered={activeIcon === 'data'} />
-                                    </div>
-                                    <div className="header-text">
-                                        <h3>{t('axes.data_title')}</h3>
-                                        <p>{t('axes.data_desc')}</p>
-                                    </div>
-                                </div>
-                                <Link to="/datos" className="header-cta">
-                                    {t('axes.data_cta')} <ArrowRight size={16} />
-                                </Link>
-                            </div>
-
-                            {/* Projects List */}
-                            <ScrollableProjectList>
-                                <ProjectCard
-                                    title="Dentro del Pleno"
-                                    tags="Datos / Scrollytelling"
-                                    year="2025"
-                                    desc={t('projects.dentro_del_pleno.desc')}
-                                    image="/images/dentro-del-pleno.png"
-                                    projectUrl="https://dentrodelpleno.pages.dev"
-                                    projectLinkText={t('projects.dentro_del_pleno.link')}
-                                    onOpenModal={setSelectedImage}
-                                />
-                                <ProjectCard
-                                    title="AforoLab"
-                                    tags="Datos / Deporte"
-                                    year="2025"
-                                    desc={t('projects.aforolab.desc')}
-                                    image="/images/aforolab.png"
-                                    projectUrl="https://aforolab.pages.dev"
-                                    projectLinkText={t('projects.aforolab.link')}
-                                    onOpenModal={setSelectedImage}
-                                />
-                            </ScrollableProjectList>
-                        </div>
-
-                        {/* ROW 2: PRODUCTO */}
-                        <div className="core-axis-row">
-                            <div
-                                className="core-header-wide"
-                                onMouseEnter={() => setActiveIcon('product')}
-                                onMouseLeave={() => setActiveIcon(null)}
-                                onClick={() => setActiveIcon('product')}
-                            >
-                                <div className="header-content-left">
-                                    <div className="header-icon-wrapper">
-                                        <AnimatedProductIcon isHovered={activeIcon === 'product'} />
-                                    </div>
-                                    <div className="header-text">
-                                        <h3>{t('axes.product_title')}</h3>
-                                        <p>{t('axes.product_desc')}</p>
-                                    </div>
-                                </div>
-                                <Link to="/producto" className="header-cta">
-                                    {t('axes.product_cta')} <ArrowRight size={16} />
-                                </Link>
-                            </div>
-
-                            <ScrollableProjectList>
-                                <ProjectCard
-                                    title="Wordle Canario"
-                                    tags="Web / Viral"
-                                    year="2022"
-                                    desc={t('projects.wordle_canario.desc')}
-                                    image="/images/wordle-canario-web.png"
-                                    projectUrl="https://wordlecanario.com"
-                                    projectLinkText={t('projects.wordle_canario.link')}
-                                    onOpenModal={setSelectedImage}
-                                />
-                            </ScrollableProjectList>
-                        </div>
-
-                        {/* ROW 3: CREATIVIDAD */}
-                        <div className="core-axis-row">
-                            <div
-                                className="core-header-wide"
-                                onMouseEnter={() => setActiveIcon('creative')}
-                                onMouseLeave={() => setActiveIcon(null)}
-                                onClick={() => setActiveIcon('creative')}
-                            >
-                                <div className="header-content-left">
-                                    <div className="header-icon-wrapper">
-                                        <AnimatedCreativeIcon isHovered={activeIcon === 'creative'} />
-                                    </div>
-                                    <div className="header-text">
-                                        <h3>{t('axes.creative_title')}</h3>
-                                        <p>{t('axes.creative_desc')}</p>
-                                    </div>
-                                </div>
-                                <Link to="/contenido" className="header-cta">
-                                    {t('axes.creative_cta')} <ArrowRight size={16} />
-                                </Link>
-                            </div>
-
-                            <ScrollableProjectList>
-                                <ProjectCard
-                                    title="Kike Pérez"
-                                    tags="Diseño Gráfico"
-                                    year="2023"
-                                    desc={t('projects.kike_perez.desc')}
-                                    image="/images/kikeperez.jpg"
-                                    detailImage="/images/kikeperez.jpg"
-                                    onOpenModal={setSelectedImage}
-                                />
-                                <ProjectCard
-                                    title="Pasión Colchonera"
-                                    tags="Branding / Social"
-                                    year="2021"
-                                    desc={t('projects.pasion_colchonera.desc')}
-                                    image="/images/pasion-colchonera.webp"
-                                    detailImage="/images/pasion-colchonera-banner.jpg"
-                                    onOpenModal={setSelectedImage}
-                                />
-                            </ScrollableProjectList>
-                        </div>
-
-                    </div>
-                </section>
-
-                {/* NEW SPLIT SECTION: Tools (Left) & Experience (Right) */}
-                <section className="section">
-                    <div className="container" style={{ maxWidth: '1400px' }}>
-                        <div className="split-content-container">
-
-                            {/* LEFT COLUMN: Tools */}
-                            <div className="split-col-left">
-                                <motion.div
-                                    initial="hidden"
-                                    whileInView="visible"
-                                    viewport={{ once: true }}
-                                    variants={fadeInUp}
-                                >
-                                    <h2 className="section-title">{t('sections.tools_title')}</h2>
-
-                                    <div className="skills-grid">
-
-                                        {/* 1. Datos y Estrategia */}
-                                        <div className="skill-card glass-panel">
-                                            <div className="skill-header">
-                                                <BarChart3 className="text-secondary" size={28} />
-                                                <h3>{t('sections.tools_data_title')}</h3>
-                                            </div>
-                                            <p className="skill-desc" style={{ marginBottom: '1rem' }}>{t('sections.tools_data_desc')}</p>
-                                            <div className="tool-grid">
-                                                <ToolBadge type="office-xl" label="X" name="Excel" />
-                                                <ToolBadge type="office-pb" label="Pb" name="PowerBI" />
-                                                <ToolBadge type="text-accent" icon={<Code2 size={14} />} name="SQL" />
-                                                <ToolBadge type="text-warning" label="Py" name="Python" />
-                                                <ToolBadge type="brand-qgis" label="Qg" name="QGIS" />
-                                                <ToolBadge type="brand-spss" label="S" name="SPSS" />
-                                            </div>
-                                        </div>
-
-                                        {/* 2. Diseño y Vídeo */}
-                                        <div className="skill-card glass-panel">
-                                            <div className="skill-header">
-                                                <PenTool className="text-accent" size={28} />
-                                                <h3>{t('sections.tools_design_title')}</h3>
-                                            </div>
-                                            <p className="skill-desc" style={{ marginBottom: '1rem' }}>{t('sections.tools_design_desc')}</p>
-                                            <div className="tool-grid">
-                                                <ToolBadge type="adobe-ps" label="Ps" name="Photoshop" />
-                                                <ToolBadge type="adobe-ai" label="Ai" name="Illustrator" />
-                                                <ToolBadge type="adobe-pr" label="Pr" name="Premiere Pro" />
-                                                <ToolBadge type="text-accent" label="Fi" name="Figma" />
-                                                <ToolBadge type="adobe-id" label="Id" name="InDesign" />
-                                            </div>
-                                        </div>
-
-                                        {/* 3. Gestión y Comunicación */}
-                                        <div className="skill-card glass-panel">
-                                            <div className="skill-header">
-                                                <Briefcase className="text-accent" size={28} />
-                                                <h3>{t('sections.tools_management_title')}</h3>
-                                            </div>
-                                            <p className="skill-desc" style={{ marginBottom: '1rem' }}>{t('sections.tools_management_desc')}</p>
-                                            <div className="tool-grid">
-                                                <ToolBadge type="office-wd" label="W" name="Word" />
-                                                <ToolBadge type="office-pp" label="P" name="PowerPoint" />
-                                                <ToolBadge type="office-wd" icon={<Mail size={14} />} name="Outlook" />
-                                                <ToolBadge type="text-secondary" icon={<Globe size={14} />} name="WordPress" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            </div>
-
-                            {/* DIVIDER */}
-                            <div className="split-divider"></div>
-
-                            {/* RIGHT COLUMN: Experience */}
-                            <div className="split-col-right">
-                                <motion.div
-                                    initial="hidden"
-                                    whileInView="visible"
-                                    viewport={{ once: true }}
-                                    variants={fadeInUp}
-                                >
-                                    <h2 className="section-title">{t('sections.experience_title')}</h2>
-                                    <div className="timeline">
-                                        <TimelineItem
-                                            role={t('timeline.practices.role')}
-                                            place={t('timeline.practices.place')}
-                                            period="Diciembre 2023 – Junio 2024"
-                                            description={t('timeline.practices.desc')}
-                                        />
-                                        <TimelineItem
-                                            role={t('timeline.degree.role')}
-                                            place={t('timeline.degree.place')}
-                                            period="2020 – 2024"
-                                            description={t('timeline.degree.desc')}
-                                        />
-                                        <TimelineItem
-                                            role="Co-fundador / Diseño"
-                                            place="Fondo Segunda"
-                                            period="2020"
-                                            description={t('projects.fondo_segunda.desc')}
-                                        />
-                                    </div>
-                                </motion.div>
-                            </div>
-
-                        </div>
-                    </div>
-                </section>
-
-                {/* About / Intro Section */}
-                <section id="sobre-mi" className="section">
+                <motion.section id="sobre-mi" className="section" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}>
                     <div className="container">
-                        <motion.div
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true, margin: "-100px" }}
-                            variants={fadeInUp}
-                            className="about-grid"
-                        >
+                        <div className="about-grid">
                             <div className="about-text">
                                 <h2>{t('sections.about_title')}</h2>
-                                <p>
-                                    <Trans i18nKey="sections.about_intro">
-                                        Soy graduado en <strong>Ciencia Política y de la Administración</strong>, y mi pasión está en la intersección entre
-                                        lo <strong>digital</strong> y lo <strong>institucional</strong>. Me muevo cómodo entre documentos técnicos, hojas de cálculo,
-                                        normativa, expedientes y líneas de tiempo de vídeo.
-                                    </Trans>
-                                </p>
-                                <p>
-                                    <Trans i18nKey="sections.about_translator">
-                                        En entornos donde la información suele ser densa, mi trabajo es actuar como <strong>"traductor"</strong>,
-                                        convirtiendo datos, normas y documentos en algo claro, visual y útil, que se entienda rápido
-                                        y llegue a quien tiene que llegar.
-                                    </Trans>
-                                </p>
-                                <p>
-                                    <Trans i18nKey="sections.about_autodidact">
-                                        Muchas de las habilidades que uso hoy las he aprendido de forma <strong>autodidacta</strong>. Suelo explorar por mi
-                                        cuenta cualquier herramienta nueva, entender su lógica y adaptarla rápidamente a lo que necesito.
-                                        Aprendo probando, entendiendo el sistema y aplicándolo a proyectos reales.
-                                    </Trans>
-                                </p>
+                                <p><Trans i18nKey="sections.about_intro">Soy graduado en <strong>Ciencia Política</strong>...</Trans></p>
+                                <p><Trans i18nKey="sections.about_translator">Mi trabajo es actuar como <strong>"traductor"</strong>...</Trans></p>
                             </div>
-                            <div className="about-stats">
-                                <div className="stat-item">
-                                    <div className="stat-icon-wrapper">
-                                        <Brain size={32} className="text-accent" />
-                                    </div>
-                                    <span className="stat-number">Estrategia</span>
-                                    <span className="stat-label">Comprender el contexto</span>
+                            <div className="about-image-container">
+                                <div className="hero-img-wrapper" style={{ width: '300px', height: '380px', margin: '0 auto' }}>
+                                    <img src="/images/foto-perfil.png" alt="Diego" style={{ borderRadius: '12px', objectFit: 'cover', width: '100%', height: '100%' }} />
                                 </div>
-                                <div className="stat-item">
-                                    <div className="stat-icon-wrapper">
-                                        <Palette size={32} className="text-secondary" />
-                                    </div>
-                                    <span className="stat-number">Visual</span>
-                                    <span className="stat-label">Comunicar con claridad</span>
-                                </div>
-                                <div className="stat-item">
-                                    <div className="stat-icon-wrapper">
-                                        <Zap size={32} style={{ color: '#F2C811' }} />
-                                    </div>
-                                    <span className="stat-number">Resolución</span>
-                                    <span className="stat-label">Aprender y ejecutar</span>
-                                </div>
-                            </div>
-                        </motion.div>
-                    </div>
-                </section>
-
-
-
-                {/* Story Section */}
-                <section id="mi-historia" className="section">
-                    <div className="container">
-                        <motion.div
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            variants={fadeInUp}
-                            className="story-content"
-                        >
-                            <div className="story-banner">
-                                <div className="story-text">
-                                    <h2 className="">{t('sections.story_title')}</h2>
-                                    <p>
-                                        {t('sections.story_desc')}
-                                    </p>
-                                    <Link to="/mi-historia" className="btn-text">
-                                        {t('sections.story_cta')} <ArrowRight size={18} />
-                                    </Link>
-                                </div>
-                                <div className="story-image">
-                                    <img src="/images/photo01.png" alt="Yo de pequeño trasteando con un portátil" />
-                                </div>
-                            </div>
-
-                        </motion.div>
-                    </div>
-                </section>
-
-
-
-
-
-                {/* Contact Section */}
-                <section id="contacto" className="section contact-section">
-                    <div className="container text-center">
-                        <motion.div
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            variants={fadeInUp}
-                        >
-                            <h2><div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>{t('sections.contact_title')}</div></h2>
-                            <p className="contact-lead"> <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                {t('sections.contact_lead')}
-                            </div></p>
-                            <div style={{ display: "flex", justifyContent: "center", gap: "1rem", marginTop: "2rem", flexWrap: "wrap" }}>
-                                <a href="mailto:jdiegotejeras@gmail.com" className="btn btn-primary btn-large">
-                                    <MailFilledIcon size={20} className="btn-icon" /> {t('sections.send_email')}
-                                </a>
-                                <a href="https://www.linkedin.com/in/juandiegotejerasosa/" className="btn btn-outline btn-large" target="_blank" rel="noopener noreferrer">
-                                    <LinkedInIcon size={20} className="btn-icon" /> LinkedIn
-                                </a>
-                            </div>
-                        </motion.div>
-                    </div>
-                </section>
-            </main>
-
-            <footer>
-                <div className="container">
-                    <p>© {new Date().getFullYear()} Juan Diego Tejera.</p>
-                </div>
-            </footer>
-
-            {/* Modal for Project Details */}
-            {
-                selectedImage && (
-                    <div className="lightbox" onClick={() => setSelectedImage(null)} style={{ zIndex: 10000 }}>
-                        <div
-                            className="lightbox-content project-detail-modal"
-                            onClick={e => e.stopPropagation()}
-                            style={{
-                                background: '#111',
-                                border: '1px solid rgba(255,255,255,0.1)',
-                                borderRadius: '16px',
-                                padding: '0',
-                                maxWidth: '900px',
-                                width: '90%',
-                                display: 'flex',
-                                flexDirection: 'column',
-                                overflow: 'hidden',
-                                position: 'relative'
-                            }}
-                        >
-                            <button
-                                className="lightbox-close"
-                                onClick={() => setSelectedImage(null)}
-                                style={{
-                                    position: 'absolute',
-                                    top: '1rem',
-                                    right: '1rem',
-                                    background: 'rgba(0,0,0,0.5)',
-                                    border: 'none',
-                                    borderRadius: '50%',
-                                    width: '32px',
-                                    height: '32px',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    color: '#fff',
-                                    cursor: 'pointer',
-                                    zIndex: 10
-                                }}
-                            >
-                                <X size={20} />
-                            </button>
-
-                            {/* Image Part */}
-                            {selectedImage.image && (
-                                <div className="modal-image-wrapper" style={{ width: '100%', maxHeight: '50vh', overflow: 'hidden', background: '#000' }}>
-                                    <img
-                                        src={selectedImage.image}
-                                        alt={selectedImage.title || "Project"}
-                                        style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-                                    />
-                                </div>
-                            )}
-
-                            {/* Text Part */}
-                            <div className="modal-text-content" style={{ padding: '2rem' }}>
-                                {selectedImage.tags && (
-                                    <div style={{ color: 'var(--accent-primary)', fontSize: '0.9rem', marginBottom: '0.5rem', fontWeight: 600 }}>
-                                        {selectedImage.tags} — {selectedImage.year}
-                                    </div>
-                                )}
-                                <h3 style={{ fontSize: '2rem', marginBottom: '1rem', lineHeight: 1.2 }}>
-                                    {selectedImage.title}
-                                </h3>
-                                <p style={{ fontSize: '1rem', lineHeight: 1.6, color: 'var(--text-secondary)' }}>
-                                    {selectedImage.desc}
-                                </p>
                             </div>
                         </div>
                     </div>
-                )
-            }
-        </div >
-    );
-}
+                </motion.section>
 
-const MailFilledIcon = ({ size = 24, className }) => (
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width={size}
-        height={size}
-        viewBox="1 3 22 18"
-        fill="currentColor"
-        className={className}
-    >
-        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-    </svg>
-);
+                {/* PROJECTS SECTION - Minimalist with Icon Filters */}
+                <motion.section id="proyectos" className="projects-section section" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}>
+                    <div className="container">
+                        <div className="projects-section-header">
+                            <h2 className="section-title">{t('sections.projects_title')}</h2>
+                            <motion.p
+                                className="projects-section-subtitle"
+                                key={hoveredFilter || filter}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.4, ease: "easeInOut" }}
+                            >
+                                {(hoveredFilter || filter) === 'all' && 'Proyectos, piezas y experimentos'}
+                                {(hoveredFilter || filter) === 'datos' && t('axes.data_desc')}
+                                {(hoveredFilter || filter) === 'producto' && t('axes.product_desc')}
+                                {(hoveredFilter || filter) === 'creativo' && t('axes.creative_desc')}
+                            </motion.p>
+                        </div>
 
-// Sub-components for cleaner code
-const LinkedInIcon = ({ size = 24, className }) => (
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width={size}
-        height={size}
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        className={className}
-    >
-        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-    </svg>
-);
+                        {/* Filter Icons (Centered) */}
+                        <div className="filter-icons-container">
+                            <FilterIcon
+                                icon={<AnimatedAllIcon isHovered={hoveredFilter === 'all'} />}
+                                label="Todos"
+                                isActive={filter === 'all'}
+                                onClick={() => setFilter('all')}
+                                onHover={() => setHoveredFilter('all')}
+                                onLeave={() => setHoveredFilter(null)}
+                            />
+                            <FilterIcon
+                                icon={<AnimatedDataIcon isHovered={hoveredFilter === 'datos'} />}
+                                label={t('axes.data_title')}
+                                isActive={filter === 'datos'}
+                                onClick={() => setFilter('datos')}
+                                onHover={() => setHoveredFilter('datos')}
+                                onLeave={() => setHoveredFilter(null)}
+                            />
+                            <FilterIcon
+                                icon={<AnimatedProductIcon isHovered={hoveredFilter === 'producto'} />}
+                                label={t('axes.product_title')}
+                                isActive={filter === 'producto'}
+                                onClick={() => setFilter('producto')}
+                                onHover={() => setHoveredFilter('producto')}
+                                onLeave={() => setHoveredFilter(null)}
+                            />
+                            <FilterIcon
+                                icon={<AnimatedCreativeIcon isHovered={hoveredFilter === 'creativo'} />}
+                                label={t('axes.creative_title')}
+                                isActive={filter === 'creativo'}
+                                onClick={() => setFilter('creativo')}
+                                onHover={() => setHoveredFilter('creativo')}
+                                onLeave={() => setHoveredFilter(null)}
+                            />
+                        </div>
 
-function SocialLink({ href, icon, label }) {
-    return (
-        <a href={href} className="social-link" aria-label={label} target="_blank" rel="noopener noreferrer">
-            {icon}
-        </a>
-    );
-}
+                        {/* Unified Project Grid */}
+                        <UnifiedProjectGrid
+                            projects={filteredProjects}
+                            selectedProject={selectedProject}
+                            onProjectClick={handleProjectClick}
+                            getColumns={getColumns}
+                        />
+                    </div>
+                </motion.section>
 
+                {/* SPLIT SECTION: Tools & Experience */}
+                <motion.section id="herramientas" className="section" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}>
+                    <div className="container">
+                        <div className="split-content-container">
+                            <div className="split-col-left">
+                                <h2 className="section-title-small">{t('sections.tools_title')}</h2>
+                                <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem', fontSize: '0.95rem' }}>
+                                    {t('sections.tools_subtitle')}
+                                </p>
+                                <div className="skills-grid">
+                                    <SkillCard
+                                        icon={<BarChart3 size={32} />}
+                                        title={t('sections.tools_data_title')}
+                                        desc={t('sections.tools_data_desc')}
+                                        tools={[
+                                            { name: "Python", logo: "https://cdn.simpleicons.org/python" },
+                                            { name: "R", logo: "https://cdn.simpleicons.org/r" },
+                                            { name: "SQL", logo: "https://cdn.simpleicons.org/postgresql" },
+                                            { name: "Excel", logo: "https://img.icons8.com/color/48/microsoft-excel-2019.png" },
+                                            { name: "Power BI", logo: "https://img.icons8.com/color/48/power-bi.png" }
+                                        ]}
+                                    />
+                                    <SkillCard
+                                        icon={<Palette size={32} />}
+                                        title={t('sections.tools_design_title')}
+                                        desc={t('sections.tools_design_desc')}
+                                        tools={[
+                                            { name: "Premiere", logo: "https://img.icons8.com/color/48/adobe-premiere-pro.png" },
+                                            { name: "Photoshop", logo: "https://img.icons8.com/color/48/adobe-photoshop.png" },
+                                            { name: "After Effects", logo: "https://img.icons8.com/color/48/adobe-after-effects.png" },
+                                            { name: "InDesign", logo: "https://img.icons8.com/color/48/adobe-indesign.png" },
+                                            { name: "CapCut", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Capcut-icon.svg/960px-Capcut-icon.svg.png" }
+                                        ]}
+                                    />
+                                    <SkillCard
+                                        icon={<Code2 size={32} />}
+                                        title={t('sections.tools_management_title')}
+                                        desc={t('sections.tools_management_desc')}
+                                        tools={[
+                                            { name: "Notion", logo: "https://cdn.simpleicons.org/notion" },
+                                            { name: "Office 365", logo: "https://img.icons8.com/color/48/microsoft-office-2019.png" },
+                                            { name: "Wordpress", logo: "https://cdn.simpleicons.org/wordpress" }
+                                        ]}
+                                    />
+                                </div>
+                            </div>
+                            <div className="split-divider"></div>
+                            <div className="split-col-right" id="trayectoria">
+                                <h2 className="section-title-small">{t('sections.experience_title')}</h2>
+                                <div className="timeline">
+                                    <TimelineItem
+                                        role={t('timeline.csif.role')}
+                                        place={t('timeline.csif.place')}
+                                        period={t('timeline.csif.period')}
+                                        description={t('timeline.csif.desc')}
+                                        icon={<img src="/images/logos/csif.png" alt="CSIF" />}
+                                    />
+                                    <TimelineItem
+                                        role={t('timeline.practices.role')}
+                                        place={t('timeline.practices.place')}
+                                        period={t('timeline.practices.period')}
+                                        description={t('timeline.practices.desc')}
+                                        icon={<Briefcase size={20} />}
+                                    />
+                                    <TimelineItem
+                                        role={t('timeline.degree.role')}
+                                        place={t('timeline.degree.place')}
+                                        period={t('timeline.degree.period')}
+                                        description={t('timeline.degree.desc')}
+                                        icon={<img src="/images/logos/usc.png" alt="USC" style={{ padding: '5px', objectFit: 'contain' }} />}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </motion.section>
 
-function ToolBadge({ type, label, icon, name }) {
-    return (
-        <div className="tool-badge" title={name}>
-            <span className={`brand-box ${type}`}>
-                {icon || label}
-            </span>
-            <span>{name}</span>
+                <motion.section id="mi-historia" className="section" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}>
+                    <div className="container"><div className="story-content"><div className="story-banner">
+                        <div className="story-text">
+                            <h2>{t('sections.story_title')}</h2>
+                            <p>{t('sections.story_desc')}</p>
+                            <Link to="/mi-historia" className="btn-text">{t('sections.story_cta')} <ArrowRight size={18} /></Link>
+                        </div>
+                        <div className="story-image"><img src="/images/photo01.png" alt="Historia" /></div>
+                    </div></div></div>
+                </motion.section>
+
+                <motion.section id="contacto" className="section contact-section" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}>
+                    <div className="container text-center">
+                        <h2>{t('sections.contact_title')}</h2>
+                        <p className="contact-lead">{t('sections.contact_lead')}</p>
+                        <div style={{ display: "flex", justifyContent: "center", gap: "1rem", marginTop: "2rem", flexWrap: "wrap" }}>
+                            <a href="mailto:jdiegotejeras@gmail.com" className="btn btn-primary btn-large"><MailFilledIcon size={20} className="btn-icon" /> {t('sections.send_email')}</a>
+                            <a href="https://linkedin.com/in/juandiegotejerasosa/" className="btn btn-outline btn-large" target="_blank" rel="noopener noreferrer"><LinkedInIcon size={20} className="btn-icon" /> LinkedIn</a>
+                        </div>
+                    </div>
+                </motion.section>
+            </main>
+
+            <footer><div className="container"><p>© {new Date().getFullYear()} Juan Diego Tejera.</p></div></footer>
         </div>
     );
 }
 
-function SkillCard({ icon, title, desc }) {
+// Sub-components
+function FilterIcon({ icon, label, isActive, onClick, onHover, onLeave }) {
     return (
-        <motion.div className="skill-card glass-panel" whileHover={{ y: -5 }}>
-            <div className="skill-icon">{icon}</div>
-            <h3>{title}</h3>
-            <p>{desc}</p>
-        </motion.div>
+        <div
+            className={`filter-icon ${isActive ? 'active' : ''}`}
+            onClick={onClick}
+            onMouseEnter={onHover}
+            onMouseLeave={onLeave}
+            role="button"
+            tabIndex={0}
+            onKeyPress={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onClick();
+                }
+            }}
+        >
+            <div className="filter-icon-graphic">{icon}</div>
+            <div className="filter-icon-label">{label}</div>
+        </div>
     );
 }
 
-function TimelineItem({ role, place, period, description }) {
+function UnifiedProjectGrid({ projects, selectedProject, onProjectClick, getColumns }) {
     return (
-        <div className="timeline-item">
-            <div className="timeline-marker"></div>
-            <div className="timeline-content">
-                <span className="timeline-date">{period}</span>
-                <h3>{role}</h3>
-                <h4>{place}</h4>
-                <p>{description}</p>
+        <>
+            <div className="projects-compact-grid">
+                {projects.map((project, idx) => (
+                    <ProjectTile
+                        key={project.id}
+                        project={project}
+                        isActive={selectedProject?.id === project.id}
+                        onClick={() => onProjectClick(project)}
+                        idx={idx}
+                    />
+                ))}
             </div>
-        </div>
+
+            {/* Modal for project details */}
+            {selectedProject && (
+                <ProjectModal
+                    project={selectedProject}
+                    onClose={() => onProjectClick(selectedProject)}
+                />
+            )}
+        </>
     );
 }
 
-function ProjectCard({ title, tags, year, desc, image, projectUrl, projectLinkText, detailImage, onOpenModal }) {
-
-    // Handler for clicking the card itself (opens modal)
-    const handleCardClick = () => {
-        onOpenModal({
-            title,
-            desc,
-            image: detailImage || image,
-            tags,
-            year
-        });
-    };
-
+function ProjectTile({ project, isActive, onClick, idx }) {
     return (
         <motion.div
-            className="project-card"
-            whileHover={{ y: -5 }}
-            onClick={handleCardClick}
-            style={{ cursor: 'pointer' }}
+            className={`project-tile ${isActive ? 'active' : ''}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{
+                duration: 0.4,
+                delay: idx * 0.03,
+                ease: "easeInOut"
+            }}
+            onClick={onClick}
+            role="button"
+            aria-expanded={isActive}
+            tabIndex={0}
+            onKeyPress={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onClick();
+                }
+            }}
         >
-            {image && (
-                <div className="project-image-container">
-                    <img src={image} alt={title} draggable="false" loading="lazy" />
-                    <div className="image-overlay-hint">
-                        {/* Hint icon always visible on hover via CSS, generic 'maximize' */}
-                        <Maximize2 size={24} color="#fff" />
-                    </div>
-                </div>
-            )}
-            <div className="project-content">
-                <div className="project-header">
-                    <span className="project-tags">{tags}</span>
-                    <span className="project-year">{year}</span>
-                </div>
-                <h3>{title}</h3>
-                <p>{desc}</p>
-
-                <div className="project-footer">
-                    {/* Primary Button for URL if exists. Stops propagation to avoid opening modal when clicking link. */}
-                    {projectUrl && (
-                        <a
-                            href={projectUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn-project-link" // New class for visible button style
-                            onClick={(e) => e.stopPropagation()}
-                            style={{
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                gap: '8px',
-                                background: 'rgba(255,255,255,0.1)',
-                                padding: '8px 16px',
-                                borderRadius: '6px',
-                                textDecoration: 'none',
-                                color: '#fff',
-                                fontWeight: 600,
-                                fontSize: '0.9rem',
-                                border: '1px solid rgba(255,255,255,0.1)',
-                                transition: 'all 0.2s'
-                            }}
-                        >
-                            {projectLinkText || "Visitar web"} <ExternalLink size={14} />
-                        </a>
-                    )}
-
-                    {/* If no URL, maybe Show 'Ver Detalles' text? Or just rely on card click context? 
-                        User asked for a button for "Visitar..." but implies the rest of the card opens modal.
-                        For consistency, maybe no extra button if no URL, just the card click.
-                    */}
-                    {!projectUrl && (
-                        <span className="link-text-btn" style={{ opacity: 0.7, fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                            Ver detalles <Maximize2 size={14} />
-                        </span>
-                    )}
-                </div>
+            <div className="project-tile-image">
+                <img src={project.image} alt={project.title} />
             </div>
+
+            <div className="project-tile-overlay">
+                <span className="project-tile-tag">{project.tagShort}</span>
+                <h3 className="project-tile-title">{project.title}</h3>
+            </div>
+
+            <div className="project-tile-expand-hint">+</div>
         </motion.div>
     );
 }
+
+function ProjectModal({ project, onClose }) {
+    return (
+        <motion.div
+            className="project-modal-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={onClose}
+        >
+            <motion.div
+                className="project-modal-content"
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                onClick={(e) => e.stopPropagation()}
+            >
+                <button
+                    className="project-modal-close"
+                    onClick={onClose}
+                    aria-label="Cerrar"
+                >
+                    <X size={24} />
+                </button>
+
+                <div className="project-modal-header">
+                    <div className="project-modal-image">
+                        <img src={project.image} alt={project.title} />
+                    </div>
+                    <div className="project-modal-info">
+                        <span className="project-modal-meta">{project.tagShort} • {project.year}</span>
+                        <h2 className="project-modal-title">{project.title}</h2>
+                    </div>
+                </div>
+
+                <div className="project-modal-body">
+                    <ul className="project-modal-highlights">
+                        {project.highlights.map((h, i) => (
+                            <li key={i}>{h}</li>
+                        ))}
+                    </ul>
+
+                    <div className="project-modal-actions">
+                        {project.url && (
+                            <a
+                                href={project.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="project-modal-btn project-modal-btn-primary"
+                            >
+                                Ver proyecto <ExternalLink size={18} />
+                            </a>
+                        )}
+                        <button
+                            onClick={onClose}
+                            className="project-modal-btn project-modal-btn-secondary"
+                        >
+                            Cerrar
+                        </button>
+                    </div>
+                </div>
+            </motion.div>
+        </motion.div>
+    );
+}
+
+// Icons and Helpers
+const LinkedInIcon = ({ size = 24 }) => <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>;
+const MailFilledIcon = ({ size = 24 }) => <svg width={size} height={size} viewBox="1 3 22 18" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" /></svg>;
+const SocialLink = ({ href, icon, label }) => <a href={href} className="social-link" target="_blank" rel="noopener noreferrer">{icon}</a>;
+const SkillCard = ({ icon, title, desc, tools }) => (
+    <motion.div className="skill-card glass-panel" whileHover={{ y: -5 }}>
+        <div className="skill-icon">{icon}</div>
+        <h3>{title}</h3>
+        <p>{desc}</p>
+        {tools && (
+            <div className="skill-pills">
+                {tools.map((tool, i) => (
+                    <span key={i} className="skill-pill">
+                        <img
+                            src={tool.logo}
+                            alt=""
+                            style={{
+                                width: '12px',
+                                height: '12px',
+                                marginRight: '6px',
+                                verticalAlign: 'middle',
+                                display: 'inline-block'
+                            }}
+                        />
+                        {tool.name}
+                    </span>
+                ))}
+            </div>
+        )}
+    </motion.div>
+);
+const TimelineItem = ({ role, place, period, description, icon }) => (
+    <div className="timeline-item">
+        <div className="timeline-marker">
+            {icon}
+        </div>
+        <div className="timeline-content">
+            <span className="timeline-date">{period}</span>
+            <h3>{role}</h3>
+            <h4>{place}</h4>
+            <p>{description}</p>
+        </div>
+    </div>
+);
+const fadeInUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } };
+const staggerContainer = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 } } };
 
 export default Home;

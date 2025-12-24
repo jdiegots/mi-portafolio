@@ -7,18 +7,19 @@
   border-bottom: none;
 }
 
-/* Global Fixed Background */
+/* Global Background (Scrolly-distributed) */
 .global-background {
-  position: fixed;
+  position: absolute;
+  /* Changed from fixed to stay at specific page locations */
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
+  /* Spans the entire document height */
   z-index: -2;
   overflow: hidden;
   background-color: var(--bg-dark);
   pointer-events: none;
-  /* Prevent flashes specifically during load/resize */
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
@@ -178,7 +179,7 @@
 .blob-1 {
   width: 900px;
   height: 900px;
-  top: -15%;
+  top: 0%;
   right: -20%;
   animation-delay: 0s, 0s, -5s;
 }
@@ -186,7 +187,7 @@
 .blob-2 {
   width: 1000px;
   height: 1000px;
-  top: 5%;
+  top: 15%;
   left: -25%;
   animation-delay: -5s, -2s, 0s;
 }
@@ -203,28 +204,47 @@
 .blob-4 {
   width: 900px;
   height: 900px;
-  bottom: 0%;
+  top: 55%;
   left: -20%;
   opacity: 0.3;
   animation-delay: -15s, -8s, -15s;
+}
+
+.blob-5 {
+  width: 800px;
+  height: 800px;
+  top: 75%;
+  right: -20%;
+  opacity: 0.25;
+  animation-delay: -2s, -4s, -8s;
+}
+
+.blob-6 {
+  width: 1000px;
+  height: 1000px;
+  top: 90%;
+  left: -25%;
+  opacity: 0.3;
+  animation-delay: -8s, -2s, -4s;
 }
 
 
 
 
 .hero-content {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  grid-template-areas:
-    "text image"
-    "actions image";
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 0 3rem;
+  gap: 2rem;
+  width: 100%;
 }
 
 .hero-text {
   grid-area: text;
-  text-align: left;
+  text-align: center;
+  /* Centered for new layout */
+  width: 100%;
 }
 
 .hero-actions-wrapper {
@@ -251,7 +271,16 @@
 }
 
 .hero-title {
-  margin-bottom: 1.5rem;
+  font-size: clamp(3rem, 6vw, 7rem);
+  /* Fluid sizing for desktop */
+  font-weight: 800;
+  line-height: 1.25;
+  /* Increased from 1.1 to prevent clipping */
+  letter-spacing: -0.02em;
+  width: 100%;
+  margin-bottom: 2rem;
+  padding-bottom: 0.1em;
+  /* Extra space for descenders and gradient */
 }
 
 .hero-lead {
@@ -395,7 +424,8 @@
 
 /* Section General */
 .section {
-  padding: 6rem 0;
+  padding: 3rem 0;
+  /* Reduced from 6rem */
 }
 
 .section-title {
@@ -497,16 +527,41 @@
 }
 
 /* Simplified Gradient Text */
+/* Gradient Text with Mouse Follow */
 .name-gradient-simple {
   display: inline-block;
-  background: var(--gradient-text);
+  background: linear-gradient(90deg,
+      var(--accent-primary),
+      #c084fc,
+      var(--accent-primary),
+      #c084fc);
+  background-size: 200% auto;
+  background-position: var(--mouse-x, 0%) center;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  /* Cursor text to indicate it's readable, but animations imply interactivity */
   cursor: text;
-  /* Ensure smooth rendering */
-  will-change: transform;
+  will-change: background-position;
+  transition: background-position 0.3s ease-out;
+}
+
+/* Fallback animation when mouse is not moving */
+@media (hover: none) {
+  .name-gradient-simple {
+    animation: gradient-shift 4s ease-in-out infinite;
+  }
+}
+
+@keyframes gradient-shift {
+
+  0%,
+  100% {
+    background-position: 0% center;
+  }
+
+  50% {
+    background-position: 100% center;
+  }
 }
 
 .story-banner p {
@@ -811,14 +866,27 @@
 
 .timeline-marker {
   position: absolute;
-  left: -2.6rem;
-  top: 0.5rem;
-  width: 1.2rem;
-  height: 1.2rem;
-  background: var(--bg-dark);
+  /* Timeline padding is 1.5rem. Marker width 2.5rem. Center at -1.5rem -> left: -1.5 - 1.25 = -2.75rem */
+  left: -2.75rem;
+  top: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: #ffffff;
   border: 2px solid var(--accent-primary);
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-primary);
   box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+  z-index: 1;
+  overflow: hidden;
+}
+
+.timeline-marker img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .timeline-date {
@@ -1144,13 +1212,15 @@
 
 /* Contact */
 .contact-section {
-  background: linear-gradient(to top, #0f0f10, transparent);
+  background: transparent;
+  /* Changed from gradient */
 }
 
 .contact-lead {
   font-size: 1.5rem;
   max-width: 600px;
   margin: 0 auto 2.5rem;
+  text-align: center;
 }
 
 .btn-large {
@@ -1176,12 +1246,13 @@
 
 /* Footer */
 footer {
-  padding: 2rem 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 4rem 0 2rem;
+  border-top: none;
+  /* Removed border to integrate with background */
   text-align: center;
   font-size: 0.875rem;
   color: var(--text-secondary);
-  margin-top: auto;
+  position: relative;
 }
 
 /* Responsive */

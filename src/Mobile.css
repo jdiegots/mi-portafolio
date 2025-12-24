@@ -13,8 +13,12 @@
     }
 
     h1.hero-title {
-        font-size: 3rem !important;
-        /* Reduce large hero title */
+        font-size: clamp(2.5rem, 9vw, 4rem) !important;
+        /* Fluid size to fill width */
+        line-height: 1.3;
+        width: 100%;
+        text-align: center;
+        padding-bottom: 0.1em;
     }
 
     .hero-lead {
@@ -28,86 +32,50 @@
 
     /* --- HERO SECTION --- */
     .hero {
-        padding-top: 6rem;
+        padding-top: 5rem;
         /* Navbar overlap */
         min-height: auto;
-        /* Remove rigid full height */
-        padding-bottom: 4rem;
+        padding-bottom: 2rem;
+        /* Reduced from 4rem */
     }
 
     .hero-content {
         flex-direction: column-reverse;
-        /* Text on top? Or Image on top? Usually Image on top or Middle. Let's keep default stack but adjust gaps */
-        gap: 2rem;
+        gap: 1.5rem;
+        /* Reduced from 2rem */
     }
 
-    .hero-image-container {
-        width: 100%;
-        max-width: 300px;
-        /* Limit image size on mobile */
-        margin: 0 auto;
+    .section-title {
+        font-size: 1.75rem !important;
+        /* Slightly smaller for compactness */
+        margin-bottom: 1.5rem !important;
+        /* Reduced from 2rem */
     }
 
     /* --- PROJECTS / AXES --- */
     .core-header-wide {
         flex-direction: column;
         align-items: flex-start;
-        gap: 1rem;
-        padding: 1.5rem;
-    }
-
-    .header-content-left {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-    }
-
-    .header-text h3 {
-        font-size: 1.5rem;
-    }
-
-    .project-card {
-        min-width: 85vw !important;
-        width: 85vw !important;
-        margin-right: 1rem;
-        /* Spacing in scroll */
-        flex-direction: column !important;
-        /* Stack image/content on mobile for better visibility */
-        height: auto;
-    }
-
-    /* OVERRIDE HorizontalCards.css mobile specific row layout if it exists to be cleaner stack */
-    .node-projects-list .project-card {
-        flex-direction: column !important;
-        min-width: 80vw;
-        width: 80vw;
-    }
-
-    .node-projects-list .project-image-container {
-        width: 100% !important;
-        /* Full width image */
-        height: 180px !important;
-        /* Fixed manageable height */
-        border-radius: 12px 12px 0 0 !important;
-        /* Top corners only */
-    }
-
-    .node-projects-list .project-content {
-        padding: 1.5rem !important;
+        gap: 0.75rem;
+        padding: 1rem;
+        /* More compact header */
     }
 
     /* --- SPLIT SECTION (Tools & Experience) --- */
     /* Ensure strict stacking */
     .split-content-container {
         grid-template-columns: 1fr;
-        gap: 3rem;
-        margin-top: 2rem;
+        gap: 2rem;
+        /* Reduced from 3rem */
+        margin-top: 1rem;
+        /* Reduced from 2rem */
     }
 
     .split-col-left {
         padding-right: 0;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        padding-bottom: 3rem;
+        padding-bottom: 2rem;
+        /* Reduced from 3rem */
     }
 
     .split-col-right {

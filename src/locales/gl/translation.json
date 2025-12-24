@@ -40,7 +40,8 @@
         "story_title": "Empecei meténdome onde non sabía... e atopando como facelo funcionar",
         "story_desc": "Facía deseños, inventaba bases de datos e contaba historias sen saber por que. Años despois entendín que xa estaba a construír a miña forma de pensar.",
         "story_cta": "Un pouco da miña historia",
-        "tools_title": "As miñas ferramentas",
+        "tools_title": "Ferramentas habituais",
+        "tools_subtitle": "Adáptome rápido a novas ferramentas segundo o equipo e o fluxo de traballo.",
         "experience_title": "Traxectoría",
         "contact_title": "Falamos?",
         "contact_lead": "Estou dispoñible ;)",
@@ -77,12 +78,20 @@
         }
     },
     "timeline": {
+        "csif": {
+            "period": "Desde setembro de 2025",
+            "role": "Comunicación institucional e sindical",
+            "place": "Central Sindical Independiente de Funcionarios (CSIF) · Unión Provincial de Las Palmas",
+            "desc": "Apoio en tarefas de comunicación externa e interna para a Unión Provincial, con elaboración e adaptación de pezas informativas e contidos de vídeo. Redacción e edición de notas de prensa, e axuste de mensaxes a distintos formatos."
+        },
         "practices": {
+            "period": "Xaneiro 2025 - Maio 2025",
             "role": "Traballo técnico-institucional",
             "place": "Prácticas · Desenvolvemento e Comunicación",
             "desc": "Soporte integral en tarefas de comunicación e xestión técnica: redacción e maquetación de documentos, notas de prensa e administración de redes sociais. Realización de todo o ciclo de análise de datos para informes e enquisas (recollida, depuración e visualización) e sintetización de normativas e convocatorias en criterios claros. Colaboración activa na coordinación interna e con outras entidades."
         },
         "degree": {
+            "period": "2020 - 2024",
             "role": "Grao en Ciencia Política e da Administración",
             "place": "Universidade de Santiago de Compostela",
             "desc": "Formación con forte carga metodolóxica e analítica. Especialización en estatística aplicada e técnicas de investigación social (cuantitativas e cualitativas), combinada co estudo profundo da xestión pública, a estratexia política e a comunicación. Análise de decisións, comportamento electoral e avaliación de políticas públicas."

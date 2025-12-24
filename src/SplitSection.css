@@ -5,7 +5,8 @@
     /* Left, Divider, Right */
     gap: 0;
     /* Gap handled by padding around divider */
-    margin-top: 4rem;
+    margin-top: 2rem;
+    /* Reduced from 4rem */
     align-items: stretch;
     position: relative;
     background: linear-gradient(90deg,
@@ -76,3 +77,30 @@
 }
 
 /* Remove default timeline Item margins if needed to compact? No, keep standard. */
+
+/* Skill Pills */
+.skill-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.skill-pill {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    background: rgba(255, 255, 255, 0.08);
+    /* Transparent subtle bg */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 9999px;
+    /* Pill shape */
+    color: var(--text-secondary);
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.skill-card:hover .skill-pill {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}

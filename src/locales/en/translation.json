@@ -27,7 +27,7 @@
         "product_title": "PRODUCT",
         "product_desc": "I build digital products that guide and engage. Hierarchy, rhythm, and micro-details to facilitate exploration and create scalable experiences.",
         "product_cta": "See the approach",
-        "creative_title": "CREATIVE CONTENT",
+        "creative_title": "CREATIVE\nCONTENT",
         "creative_desc": "Content with identity and a focus on results. Structure, aesthetics, and pacing to sustain attention. The format changes, the criteria remain.",
         "creative_cta": "See the montage"
     },
@@ -40,7 +40,8 @@
         "story_title": "I started getting into things I didn't know... and figuring out how to make them work",
         "story_desc": "I made designs, invented databases, and told stories without knowing why. Years later I understood that I was already building my way of thinking.",
         "story_cta": "A bit of my story",
-        "tools_title": "My tools",
+        "tools_title": "Core Tools",
+        "tools_subtitle": "I adapt quickly to new tools depending on the team and workflow.",
         "experience_title": "Experience",
         "contact_title": "Let's talk?",
         "contact_lead": "I'm available ;)",
@@ -77,12 +78,20 @@
         }
     },
     "timeline": {
+        "csif": {
+            "period": "Since September 2025",
+            "role": "Institutional and Trade Union Communication",
+            "place": "Central Independent Union of Civil Servants (CSIF) · Las Palmas Provincial Union",
+            "desc": "Support in external and internal communication tasks for the Provincial Union, creating and adapting information pieces and video content. Drafting and editing press releases, and adjusting messages to different formats."
+        },
         "practices": {
+            "period": "January 2025 - May 2025",
             "role": "Technical-Institutional Work",
             "place": "Internship · Development and Communication",
             "desc": "Integral support in communication and technical management tasks: drafting and layout of documents, press releases, and social media administration. Execution of the entire data analysis cycle for reports and surveys (collection, cleaning, and visualization) and synthesis of regulations and calls into clear criteria. Active collaboration in internal coordination and with other entities."
         },
         "degree": {
+            "period": "2020 - 2024",
             "role": "Degree in Political Science and Administration",
             "place": "University of Santiago de Compostela",
             "desc": "Training with a strong methodological and analytical load. Specialization in applied statistics and social research techniques (quantitative and qualitative), combined with deep study of public management, political strategy, and communication. Decision analysis, electoral behavior, and public policy evaluation."
