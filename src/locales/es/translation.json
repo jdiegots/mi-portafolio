@@ -21,6 +21,8 @@
         "name": "Diego Tejera :)"
     },
     "axes": {
+        "all_title": "TODOS",
+        "allprojects_desc": "Proyectos, piezas y experimentos",
         "data_title": "DATOS",
         "data_desc": "Trabajo datos para convertirlos en entregables claros y sólidos. Limpieza, consistencia y visualización para que lo publicado sea comprensible y defendible.",
         "data_cta": "Ver el método",
